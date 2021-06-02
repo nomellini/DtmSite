@@ -1,0 +1,27 @@
+.footer{
+    width: 95%;
+    height: 546px;
+    background: #135CA1;
+    border-radius: 8px;
+    padding: 10%;
+
+}
+
+.footer-link{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.footer-link-tittle{
+    /* H / Title */
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+
+    /* White */
+    color: #FFFFFF;
+}
+
+
