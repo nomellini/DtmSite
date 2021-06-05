@@ -6,7 +6,8 @@ export const grupoService = {
     Create,
     Delete,
     getBYId,
-    FormNotificacaoDisp
+    FormNotificacaoDisp,
+    getCalendario
 };
 
 
@@ -79,6 +80,16 @@ function getBYId(idTreinamento) {
     };
 
     return fetch(`${config.apiUrl}/v1/CurTreinamentoes/notAdm/${idTreinamento}`, requestOptions).then(handleResponse);
+}
+
+
+function getCalendario() {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/v1/CurTreinamentoes/getCalendario`, requestOptions).then(handleResponse);
 }
 
 function logout() {

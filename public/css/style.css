@@ -2484,3 +2484,104 @@ margin: 0px 0px;
 
     text-align: center;
 }
+
+.view-treinamento-calendario .modal-header{
+
+border: none !important;
+}
+
+.view-treinamento-calendario .modal-title{
+
+    margin-top: 5%;
+    }
+
+.view-treinamento-calendario .modal-content{
+
+    padding: 1%;
+}
+
+.view-treinamento-calendario .modal-body{
+
+    overflow: auto;
+    max-height: 540px;
+}
+
+
+
+.view-treinamento-calendario h5{
+    /* Calendário de treinamentos */
+
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 27px;
+
+/* Gray / 900 */
+color: #253858;
+
+
+
+}
+.view-treinamento-calendario h6{
+
+
+
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+
+/* Gray / 900 */
+color: #253858;
+
+
+}
+
+
+.view-treinamento-calendario .modal-body-item-day{
+
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 4%;
+    margin-bottom: 4%;
+    padding-top: 8%;
+
+
+}
+
+.view-treinamento-calendario .modal-body-item{
+
+    display: grid;
+    grid-template-columns: 70% 30%;
+    
+}
+
+
+.view-treinamento-calendario span{
+
+text-align: end;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+/* Gray / 500 */
+color: #97A0AF;
+
+
+
+}
+.view-treinamento-calendario p{
+
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+
+/* Gray / 900 */
+color: #253858;
+
+
+}

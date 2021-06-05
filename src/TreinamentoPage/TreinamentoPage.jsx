@@ -5,8 +5,25 @@ import { connect } from 'react-redux';
 import { grupoActions } from '../_actions';
 
 class TreinamentoPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.openCalendario = this.openCalendario.bind(this);
+
+  }
+
+  openCalendario() {
+    $('#modalcalendario').modal('show');
+
+    // this.props.dispatch(grupoActions.getAll());
+}
+
+
     componentDidMount() {
          this.props.dispatch(grupoActions.getAll());
+         this.props.dispatch(grupoActions.getCalendario());
+
     }
     componentDidUpdate(){
       console.log("componentDidUpdate");
@@ -22,6 +39,7 @@ class TreinamentoPage extends React.Component {
         var categoria = grupos.items.curTreinamentoCategorias[i];
         var selector = `#hs-solucao-home`+categoria.idCategoria;
         const el = document.querySelector(selector);
+        if(el){
         // console.log(selector,categoria.idCategoria,el)
         const listItems = el.querySelectorAll('li');
         const n = el.children.length;
@@ -31,7 +49,7 @@ class TreinamentoPage extends React.Component {
         if(length ==0){
             const div = document.querySelector(`#row-solucoes`+categoria.idCategoria);
             div.remove();
-        }
+        }}
       
       }
 
@@ -41,8 +59,7 @@ class TreinamentoPage extends React.Component {
     }
 
     render() {
-        const { user, users,grupos } = this.props;
-    console.log(grupos)
+        const { user, users,grupos,calendarios } = this.props;
 
 
         
@@ -94,12 +111,49 @@ class TreinamentoPage extends React.Component {
               <div className="col-md-6">
                 <h3>
                 Conheça nosso calendário de treinamentos              </h3>
-                <button type="button" className="btn btn-success">
+                <button type="button" className="btn btn-success" onClick={this.openCalendario}>
                 Acessar calendário     
                       </button>
               </div>
               
             </div>
+
+             
+            <div className="modal fade view-treinamento-calendario" id="modalcalendario" tabIndex={-1} role="dialog" aria-labelledby="sejaparceiro" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" >Calendário de treinamentos</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                    {calendarios && calendarios.items && calendarios.items.map((calendario)=> 
+                        <div key={calendario.dataCalendario}>
+                        <h6 className="modal-title" >{calendario.dateFormat}</h6>
+<div  className="modal-body-item-day">
+                        {calendario && calendario.calendarioTreinamentoEntityChildren && calendario.calendarioTreinamentoEntityChildren.map((item)=> 
+                        <div key={item.curTreinamento.idTreinamento} className="modal-body-item">
+                          <p>{item.curTreinamento.nome}</p>
+                          <span>{item.curTurma.aberta ? "Aberta": "Encerrada"}</span>
+                          </div>
+                            )}
+                                                    </div>
+                                                    </div>
+
+                        )}
+                    </div>
+
+                   
+                  </div>
+
+
+                </div>
+
+              </div>
+
             <div  className="div-treinamentos">
             {grupos && grupos.items && grupos.items.curTreinamentoCategorias.map((categoria)=> 
             <div className="row row-solucoes" key={categoria.nomeCategoria} id={`row-solucoes`+categoria.idCategoria}>
@@ -143,12 +197,13 @@ class TreinamentoPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication,grupos } = state;
+    const { users, authentication,grupos,calendarios } = state;
     const { user } = authentication;
     return {
         user,
         users
-        ,grupos
+        ,grupos,
+        calendarios
     };
 }
 

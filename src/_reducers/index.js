@@ -11,12 +11,13 @@ import { estados } from './estados.reducer';
 import { cidades } from './cidades.reducer';
 import { cidadesmodais } from './cidades.reducer';
 import { solucaos } from './solucaos.reducer';
+import { calendarios } from './calendarios.reducer';
 
 const rootReducer = combineReducers({
   authentication,
   users,
   gruporegister,
-
+  calendarios,
   alert,
   solucaos,
   grupos,

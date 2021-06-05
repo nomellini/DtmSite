@@ -1,4 +1,5 @@
 import { grupoConstants } from '../_constants';
+import { calendarioConstants } from '../_constants';
 import { grupoService } from '../_services';
 import { alertActions } from '.';
 import { history } from '../_helpers';
@@ -8,7 +9,8 @@ export const grupoActions = {
     Create,
     Delete,
     getBYId,
-    FormNotificacaoDisp
+    FormNotificacaoDisp,
+    getCalendario
 };
 
 function Delete(idTreinamento) {
@@ -113,6 +115,22 @@ function getAll() {
     function failure(error) { return { type: grupoConstants.GETALL_FAILURE, error } }
 }
 
+
+function getCalendario() {
+    return dispatch => {
+        dispatch(request());
+
+        grupoService.getCalendario()
+            .then(
+                calendarios => dispatch(success(calendarios)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: calendarioConstants.GETALL_REQUEST } }
+    function success(calendarios) { return { type: calendarioConstants.GETALL_SUCCESS, calendarios } }
+    function failure(error) { return { type: calendarioConstants.GETALL_FAILURE, error } }
+}
 
 function getBYId(idTreinamento) {
     return dispatch => {
