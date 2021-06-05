@@ -114,10 +114,12 @@ class ViewTreinamentoPage extends React.Component {
         const {estadoSelectedModal,cidadeselectedModal,nome,codigo,empresa,submitted } = this.state;
 
         let first = null;
+        let curTurmas = null;
         console.log(grupos)
         if(grupos.items && grupos.items.curTreinamentos){
             first = grupos.items.curTreinamentos[0];
-         
+            if( grupos.items.curTurmas && grupos.items.curTurmas.length > 0 )
+            curTurmas = grupos.items.curTurmas;
         }
 
            
@@ -235,7 +237,7 @@ class ViewTreinamentoPage extends React.Component {
                     {first.sinopse && first.sinopse.indexOf("<p>") == -1 && <div className="text-conteudo">{Parser(first.sinopse.replaceAll("\r\n","<br/>"))}</div>}
 
                     </div>
-
+{!curTurmas && 
                     <div className="tab-pane fade" id="Inscricao" role="tabpanel" aria-labelledby="Inscricao-tab" key="Inscricao">
 
                     <h6 className="h6-inscricao"> No momento, não há turmas disponíveis para esse Treinamento.</h6>
@@ -271,6 +273,7 @@ class ViewTreinamentoPage extends React.Component {
                 </div>
 
               </div>
+
 
 
 
@@ -348,9 +351,37 @@ class ViewTreinamentoPage extends React.Component {
 
 
                     </div>
+               }
+{curTurmas &&
+<div className="tab-pane fade" id="Inscricao" role="tabpanel" aria-labelledby="Inscricao-tab" key="Inscricao">
+<h6 className="h6-inscricao"> Selecione a turma que você deseja fazer parte</h6>
 
+{curTurmas && curTurmas.map((item,index)=> 
+                        <div key={index} className="item-turma-inscricao">
+                          <div className="turma-periodo-div">
+                              <div>
+                                <label>Turma</label>
+                                <p>{item.curTurmaGrupo}</p>
+                            </div>
+                            <div>
+                                <label>Período</label>
+                                <p>{item.periodo} Dias</p>
+                            </div>
+                        </div>
+                        <div className="div-cronograma">
+                        <label>Cronograma</label>
+                        {item.curTurmas && item.curTurmas.map((cur,index)=> 
+                         <p key={index}><b>Módulo {cur.curTurma.modulo}</b> - {cur.curTurma.dataInicioFormat} - {cur.curTurma.horaInicioFormat} às {cur.curTurma.horaFinalFormat} </p>
+                        )}
 
+                        </div>
+                        </div>
 
+                          )}
+						  
+
+</div> 
+    }
                     </div> 
 
 
