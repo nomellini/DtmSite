@@ -10,6 +10,7 @@ export const grupoActions = {
     Delete,
     getBYId,
     FormNotificacaoDisp,
+    Inscrever,
     getCalendario
 };
 
@@ -74,6 +75,28 @@ function Create(idTreinamento,nome,categoria,descricao,conteudo,sinopse,preco,ca
     function failure(error) { return { type: grupoConstants.CREATE_FAILURE, error } }
 }
 
+
+function Inscrever(idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,cargo,aceitepagamento,modulos) {
+    return dispatch => {
+        dispatch(request({ idTreinamento }));
+        var idTreinamentoint = idTreinamento;
+
+        grupoService.Inscrever(idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,cargo,aceitepagamento,modulos)
+            .then(
+                idTreinamento => { 
+                    dispatch(success(idTreinamento));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error("Erro ao inscrever"));
+                }
+            );
+    };
+
+    function request(idTreinamento) { return { type: grupoConstants.CREATE_REQUEST, idTreinamento } }
+    function success(idTreinamento) { return { type: grupoConstants.CREATE_SUCCESS, idTreinamento } }
+    function failure(error) { return { type: grupoConstants.CREATE_FAILURE, error } }
+}
 
 
 

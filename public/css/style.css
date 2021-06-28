@@ -2677,3 +2677,506 @@ color: #253858;
 /* Gray / 900 */
     color: #253858;
 }
+
+
+/* INSCRIÇÃO ONLINE MODAL */
+
+#inscricaoonline .modal-dialog{
+    border-radius: 8px;
+    max-width: 568px;
+    max-height: 424px;
+
+
+}
+
+.animate {
+    transition: transform .35s ease-in-out;
+  }
+
+  .animate.grow {
+    transform: scale(1.5);
+  }
+
+#inscricaoonline .modal-content{
+    background: #F4F5F7;
+
+
+}
+#inscricaoonline .btn-close{
+    float: right;
+}
+#inscricaoonline .modal-header,#inscricaoonline .modal-body,#inscricaoonline .modal-footer{
+    border: none;
+
+    }
+    
+    #inscricaoonline .modal-header{
+        text-align: center;
+        display: block;
+    }
+    #inscricaoonline .modal-header button{
+    margin: 0px;
+    padding: 0px;
+    }
+    
+    
+    
+    #inscricaoonline  .modal-content, #modalmensagem .modal-content{
+        /* height: 560px; */
+        background: #F4F5F7;
+        /* border-radius: 8px; */
+        padding: 3%;
+    }
+    
+    #inscricaoonline .modal-body, #modalmensagem .modal-body{
+        flex: none;
+    }
+    
+    #inscricaoonline .modal-footer{
+        padding: 4em;
+    }
+    
+    #inscricaoonline .modal-title{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+    
+        /* Gray / 900 */
+        color: #253858;
+
+        font-style: normal;
+
+    }
+    
+    
+    
+    
+    #inscricaoonline form {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    
+    #inscricaoonline form .form-group {
+        margin-bottom: 8%;
+        line-height: 22px;
+    
+    }
+    
+    
+    #inscricaoonline form input{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        background-color: transparent !important;
+        /* identical to box height */
+        
+        /* Gray / 500 */
+        border: none;
+        border-bottom: 1px solid #97A0AF;
+    
+    }
+    
+
+    #inscricaoonline form  .form-preencher{
+        width: 100%;
+    }
+    
+    #inscricaoonline form input::placeholder{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 22px;
+        /* identical to box height */
+        
+        /* Gray / 500 */
+        color: #97A0AF;
+      
+    
+    }
+    
+    
+    #inscricaoonline .modal-footer .btn-inscricao-login{
+    
+        width: 100%;
+    height: 32px;   
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 24px;
+        /* Blue / 500 */
+        background: #135CA1;
+        border-radius: 40px;
+    
+    
+        /* Label / Semibold */
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+    
+        /* White */
+        color: #FFFFFF;
+    
+        /* White */
+    
+        /* Inside Auto Layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 0px 0px;
+    }
+
+    #inscricaoonline .modal-footer .btn-inscricao-from{
+
+        display: flex;
+        width: 116px;
+        height: 32px;   
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 24px;
+        /* Blue / 500 */
+        background: #135CA1;
+        border-radius: 40px;
+    
+    
+        /* Label / Semibold */
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+    
+        /* White */
+        color: #FFFFFF;
+    
+        /* White */
+    
+        /* Inside Auto Layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 0px 0px;
+        
+
+    
+    }
+    
+     #inscricaoonline .modal-footer a:hover{
+        cursor: pointer;
+        text-decoration: underline !important;
+    }
+     #inscricaoonline .modal-footer a{
+        border-radius: 40px;
+        width: 141px;
+        height: 32px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 6px 24px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 19px;
+        /* identical to box height */
+    
+        /* Blue / 300 */
+        color: #458ED3 !important;
+    
+        /* Inside Auto Layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+        margin: 0px 0px;
+    }
+    
+    
+    
+    #inscricaoonline .modal-footer{
+        margin-top: 2%;
+        padding-top: 0%;
+        width: 100%;
+        /* height: 32px; */
+        /* vertical-align: middle; */
+        /* margin: auto; */
+        /* display: block; */
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+
+        display: grid;
+        grid-template-rows: 33% 33% 33%;
+        gap: 10%;
+        grid-template-columns: 100%;
+    
+    }
+    
+    
+     #inscricaoonline form .form-group-item{
+        width: 50%;
+        display: inline;
+    
+    }
+
+    #inscricaoonline form .help-block{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16px;
+
+        /* Orange / 500 */
+        color: #EE6F2E;
+    }
+    
+    
+    @media (max-width: 576px) {
+    
+        #inscricaoonline form select{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            background-color: transparent !important;
+            /* identical to box height */
+            
+            /* Gray / 500 */
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #97A0AF;
+            color: #97A0AF !important;
+           
+    
+        
+        }
+         #inscricaoonline form .form-select-div .form-group-item:first-child select{
+            margin-bottom: 8%;
+        }
+        
+    }
+    
+    @media (min-width: 992px) {
+    
+      #inscricaoonline form select{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 22px;
+            background-color: transparent !important;
+            /* identical to box height */
+            
+            /* Gray / 500 */
+            width: 48%;
+            border: none;
+            border-bottom: 1px solid #97A0AF;
+            color: #97A0AF !important;
+        
+        }
+        
+        }
+
+
+        #inscricaoonline input[type="radio"],#inscricaoonline input[type="checkbox"] {
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        #inscricaoonline .input-group-register{
+            width: 100%;
+            margin-top: 5%;
+            height: 60px;
+            
+            }
+
+
+            #inscricaoonline  .input-group-register label{
+                /* Sou cliente */
+
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+/* identical to box height */
+
+/* Gray / 900 */
+color: #253858;
+vertical-align: top;
+padding-left: 1%;
+
+
+            }
+            #inscricaoonline .input-group{
+                padding-left: 3em;
+                padding-right: 3em;
+            }
+
+            #inscricaoonline .input-label {
+                color: rgba(0,0,0,0.5);
+                font-size: 14px;
+                opacity: 1;
+                text-align: left;
+                font-weight: unset !important;
+                padding: 0.5%;
+            }
+
+            #inscricaoonline   .input-text {
+                border: 1px solid rgba(0,0,0,0.30000001192092896);
+                border-top-left-radius: 40px;
+                border-top-right-radius: 40px;
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
+                /* background: rgba(255,255,255,1); */
+                /* border: none; */
+                width: 100%;
+                height: 40px;
+                font-size: 14px;
+                padding: 5%;
+                opacity: 1;
+                text-align: left;
+            }
+
+           
+
+            #inscricaoonline .modal-footer .msg-erro{
+                margin-top: -8%;
+                /* margin-bottom: 5%; */
+            }
+                #inscricaoonline .modal-footer .error{
+                /* CPF não encontrado */
+                font-style: normal;
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 16px;
+
+                /* Orange / 500 */
+                color: #EE6F2E;
+                width: 100%;
+                margin-left: 1%;
+
+
+
+            }
+            #inscricaoonline .modal-footer .link{
+
+                /* Preencher formulário para continuar inscrição */
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 19px;
+                /* identical to box height */
+                text-align: center;
+                text-decoration-line: underline;
+
+                /* Gray / 900 */
+                color: #253858;
+                width: 100%;
+margin-left: 10%;
+                padding: 0px;
+            
+            }
+
+
+        
+
+            #inscricaoonline .modal-footer  .div-preecher-form{
+margin-top: 5%;
+                display: grid;
+                grid-template-columns: 90% 10%;
+                float: left;
+            }
+
+            #inscricaoonline .modal-footer  .div-preecher-form img{
+            /* margin-left: -5px; */
+            margin-right: 5px;
+            }
+
+
+            #inscricaoonline .modal-link{
+                text-align: center;
+            }
+            #inscricaoonline .modal-link .link-prencher-login:hover{
+                cursor: pointer;
+            }
+
+
+            #inscricaoonline  .modal-footer-preencher-form{
+                display: flex !important;
+            }
+
+
+            #inscricaoonline  .form-m2{
+                display: grid;
+                grid-auto-flow: column;
+                gap: 4%;
+            }
+
+            #inscricaoonline  .form-m2 .form-group-item{
+            width: 100%;
+            }
+
+            #inscricaoonline  .form-m2 input
+                {
+                    width:  100%;
+                }
+
+
+                #inscricaoonline  .svg-onboarding{
+                    margin-bottom: 4%;
+                }
+
+
+                #inscricaoonline   .item-turmas-div{
+
+                    display: grid;
+                    grid-auto-flow: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                }
+
+                #inscricaoonline   .item-turmas-div input[type="checkbox"]{
+                    background: #135CA1;
+                    width: 24px;
+                    height: 24px;   
+                }
+
+                #inscricaoonline .div-confirmar-pagamento{
+                    display: grid;
+                    grid-auto-flow: row dense;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 30px;
+                    margin-top: 4%;
+                }
+
+                #inscricaoonline .div-confirmar-pagamento label{
+                    /* Não aceito as condições de pagamento. */
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 19px;
+                /* identical to box height */
+
+                /* Gray / 900 */
+                color: #253858;
+
+
+                }
+
+
+                #inscricaoonline .div-confirmar-pagamento input{
+
+                    /* icon-radio-unchecked */
+
+                        width: 24px;
+                        height: 24px;
+
+
+                }
+
+
+
+                #inscricaoonline .div-confirmar-pagamento div{
+                    display: grid;
+                    grid-template-columns: 10% 90%;
+    gap: 10px
+                }

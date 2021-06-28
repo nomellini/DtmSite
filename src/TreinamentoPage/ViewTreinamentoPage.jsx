@@ -13,6 +13,9 @@ import { estadoActions } from '../_actions';
 import { cidadeActions } from '../_actions';
 
 
+import InputMask from 'react-input-mask';
+
+
 class ViewTreinamentoPage extends React.Component {
 
   constructor(props) {
@@ -22,7 +25,17 @@ class ViewTreinamentoPage extends React.Component {
     this.handleChangeEstadoModal = this.handleChangeEstadoModal.bind(this);
     this.ClearInputs = this.ClearInputs.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
+    this.handleSubmitInscricao = this.handleSubmitInscricao.bind(this);
+    this.onClickCardTurma = this.onClickCardTurma.bind(this);
+    this.setPreencherForm = this.setPreencherForm.bind(this);
+    this.setPreencherLogin = this.setPreencherLogin.bind(this);
+    this.continuarStep1 = this.continuarStep1.bind(this);
+    this.continuarStep2 = this.continuarStep2.bind(this);
+    this.confirmarInscricao = this.confirmarInscricao.bind(this);
+    this.handleOnChangeCheckBox = this.handleOnChangeCheckBox.bind(this);
+    
+    
+    
     let params = queryString.parse(this.props.location.search)
        console.log( params)
 
@@ -33,8 +46,15 @@ class ViewTreinamentoPage extends React.Component {
         nome: '',
         empresa: '',
         codigo: '',
-        submitted: false
-          };
+        submitted: false,
+        turmaSelected: null,
+        CPF: '',
+        modeLogin: true,
+        msgerroLogin: '',
+        step: '1'    ,        telefone:'',cargo:'',email:'' ,aceitepagamento: false,  modulos: [],
+
+
+      };
 
       this.props.dispatch(grupoActions.getBYId(params.idTreinamento));
 
@@ -43,11 +63,20 @@ class ViewTreinamentoPage extends React.Component {
   }
 
 
+
+
     componentDidMount() { 
       
        
 
       this.props.dispatch(estadoActions.getAll());
+
+
+    }
+
+    onClickCardTurma(item){
+        console.log(item);
+        this.setState({ turmaSelected: item,submitted: false,msgerroLogin: '',CPF: '',modeLogin: true });
 
 
     }
@@ -61,8 +90,9 @@ class ViewTreinamentoPage extends React.Component {
 
       if(sucess){
         $('#sejaparceiro').modal('hide');
+        $('#inscricaoonline').modal('hide');
         $('#modalmensagem').modal('show');
-
+        
       }
     }
 
@@ -70,7 +100,7 @@ class ViewTreinamentoPage extends React.Component {
     handleChange(e) {
       const { name, value } = e.target;
       console.log("handleChange",name,value);
-      this.setState({ [name]: value });
+      this.setState({ [name]: value,submitted: false, msgerroLogin: ''});
   }
   
       handleChangeEstadoModal(e) {
@@ -89,7 +119,9 @@ class ViewTreinamentoPage extends React.Component {
         cidadeselectedModal: '',
         nome: '',
         empresa: '',
-        codigo: '' 
+        codigo: '',
+        CPF: '',
+        telefone:'',cargo:'',email:'' ,aceitepagamento: false,modulos: []
       });
   }
 
@@ -108,13 +140,110 @@ class ViewTreinamentoPage extends React.Component {
       }
   }
 
+  continuarStep1(){
+
+    const { idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,empresa,codigo,telefone,cargo,email,CPF} = this.state;
+
+    const { dispatch } = this.props;
+
+    this.setState({ submitted: true });
+      
+    if (codigo && CPF && nome && email) {
+      this.setState({ step: '2' });
+      this.setState({ submitted: false });
+  
+  }
+
+  }
+
+  continuarStep2(){
+
+    this.setState({ step: '3' });
+
+  }
+
+  setPreencherForm(){
+    this.setState({ modeLogin: false,submitted: false, step: '1'    });
+    
+
+  }
+
+  setPreencherLogin(){
+    this.setState({ modeLogin: true,submitted: false,step: '1'     });
+
+  }
+
+  confirmarInscricao(e){
+    
+    // if(sucess){
+    //   $('#sejaparceiro').modal('hide');
+    //   $('#modalmensagem').modal('show');
+
+    // }
+
+    e.preventDefault();
+
+      const { idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,empresa,codigo,telefone,cargo,email,aceitepagamento,modulos,CPF} = this.state;
+      const { dispatch } = this.props;
+      this.setState({ submitted: true });
+      console.log(idTreinamento ,nome ,estadoSelectedModal ,cidadeselectedModal ,codigo ,CPF ,modulos,aceitepagamento)
+      if (idTreinamento && nome && estadoSelectedModal && cidadeselectedModal && codigo && CPF && modulos) {
+
+      dispatch(grupoActions.Inscrever(idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,codigo,email,CPF,telefone,cargo,aceitepagamento,modulos));
+      this.setState({ submitted: false});
+
+      }
+
+
+  }
+
+  handleSubmitInscricao(e) {
+    e.preventDefault();
+
+    const { CPF } = this.state;
+    const { dispatch } = this.props;
+
+
+
+  if (CPF) {
+    this.setState({ submitted: true });
+    this.setState({ msgerroLogin: 'CPF não encontrado'});
+
+    // dispatch(grupoActions.FormNotificacaoDisp(idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,empresa,codigo));
+    // this.setState({ submitted: false});
+
+    }
+}
+
+handleOnChangeCheckBox = (id) => {
+
+  let selected = this.state.modulos
+  // instead of using indexOf, we can use findIndex to look through array of objects
+  let find = selected.findIndex(item => item === id)
+
+  if(find > -1) {
+    selected.splice(find, 1)
+  } else {
+    // We can use find to get the item based on its id
+    selected.push(this.state.turmaSelected.curTurmas.find(item => item.curTurma.idTurma === id).curTurma.idTurma)
+  }
+
+  this.setState({ modulos: selected });
+console.log("this.state.modulos",this.state.modulos);
+  // setCheckedState(updatedCheckedState);
+
+ 
+};
 
     render() {
         const { user, users,grupos,anothersgrupos,estados,cidades,cidadesmodais,loading,sucess } = this.props;
-        const {estadoSelectedModal,cidadeselectedModal,nome,codigo,empresa,submitted } = this.state;
+        const {estadoSelectedModal,cidadeselectedModal,nome,codigo,empresa,submitted,turmaSelected,CPF,msgerroLogin,modeLogin,step,telefone,cargo,email,aceitepagamento } = this.state;
+
+
 
         let first = null;
         let curTurmas = null;
+        var sefThis = this;
         console.log(grupos)
         if(grupos.items && grupos.items.curTreinamentos){
             first = grupos.items.curTreinamentos[0];
@@ -353,11 +482,11 @@ class ViewTreinamentoPage extends React.Component {
                     </div>
                }
 {curTurmas &&
-<div className="tab-pane fade" id="Inscricao" role="tabpanel" aria-labelledby="Inscricao-tab" key="Inscricao">
+<div className="tab-pane fade" id="Inscricao" role="tabpanel" aria-labelledby="Inscricao-tab" key="Inscricao" >
 <h6 className="h6-inscricao"> Selecione a turma que você deseja fazer parte</h6>
 
 {curTurmas && curTurmas.map((item,index)=> 
-                        <div key={index} className="item-turma-inscricao">
+                        <div key={index} className="item-turma-inscricao" onClick={function () {sefThis.onClickCardTurma(item)}} data-toggle="modal" data-target="#inscricaoonline">
                           <div className="turma-periodo-div">
                               <div>
                                 <label>Turma</label>
@@ -380,8 +509,339 @@ class ViewTreinamentoPage extends React.Component {
                           )}
 						  
 
+              <div className="modal fade view-treinamento" id="modalmensagem" tabIndex={-1} role="dialog" aria-labelledby="sejaparceiro" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" >Formulário enviado com sucesso!</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                    <a href="/treinamentos">Voltar para o treinamento</a>
+
+                    </div>
+
+                   
+                  </div>
+
+
+                </div>
+
+              </div>
+              
+
+              <div className="modal fade view-treinamento" id="inscricaoonline" tabIndex={-1} role="dialog" aria-labelledby="inscricaoonline" aria-hidden="true">
+              {modeLogin && 
+
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                  <div className="modal-content">
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" className="btn-close">×</span>
+                      </button>
+                    <div className="modal-header">
+                      <h5 className="modal-title" >Inscreva-se para a turma {turmaSelected && turmaSelected.curTurmaGrupo}</h5>
+                      
+                    </div>
+                   
+                    <div className="modal-body">
+                    <form role="form" onSubmit={this.handleSubmit}>
+                    <div className="input-group-register">
+                    <div style={{display: 'inline'}}>
+                        <input type="radio" name="optlogin" value="true" id="cliente" defaultChecked />
+                        <label htmlFor="cliente" className="label-regiter-radio">Sou Cliente</label>
+                        <input type="radio" name="optlogin" value="false" id="desenvolvedor" style={{marginLeft: '5%'}}  />
+                        <label htmlFor="desenvolvedor" className="label-regiter-radio">Sou desenvolvedor</label>
+                        <input type="radio" name="optlogin" value="false" id="pessoa" style={{marginLeft: '5%'}}  />
+                        <label htmlFor="pessoa" className="label-regiter-radio">Sou pessoa física</label>
+                       </div>
+                       </div>
+
+                       <div className={'input-group' + (submitted && !CPF ? ' has-error' : '')}>
+                        <label htmlFor="Email" className="input-label">CPF</label>
+                        <InputMask mask="999.999.999-99" maskChar="" placeholder="XXX.XXX.XXX-XX" type="text" className="input-text" name="CPF" value={CPF} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} placeholder="Digite seu CPF"/>
+                        {submitted && !CPF &&
+                            <div className="help-block">Informe seu CPF</div>
+                        }
+                    </div>
+                    
+                    </form>
+                    </div>
+
+                    <div className="modal-footer">
+                      <div className="msg-erro">
+                      {submitted && msgerroLogin && <div>
+                        
+                        <img src="../../public/images/icon-alert.svg" />
+                        <span className="error">{msgerroLogin}</span></div>}
+                      </div>
+                      <div className="div-btn-submit">
+                      <button type="submit" onClick={this.handleSubmitInscricao} className="btn btn-primary btn-inscricao-login" disabled={submitted}>Entrar
+                      {loading &&                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+}
+                      </button>
+                      </div>
+                     
+                      <div>
+
+                      {submitted && msgerroLogin && 
+                      <div className="div-preecher-form">
+                      <a className="link" onClick={this.setPreencherForm}>Preencher formulário para continuar inscrição</a>
+                      <img src="../../public/images/icon-avancar-inscricao.svg"/>
+                      </div>
+                      }
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+    }
+
+    {!modeLogin &&  step && step == '1'  &&  <div className="modal-dialog modal-dialog-centered" role="document">
+
+<div className="modal-content">
+<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" className="btn-close">×</span>
+                      </button>
+  <div className="modal-header">
+    
+
+    <img src="../../public/images/onboarding-part1.svg" className="svg-onboarding"/>
+
+
+    <h5 className="modal-title" >Preencha o formulário e continue sua inscrição para a turma {turmaSelected && turmaSelected.curTurmaGrupo}</h5>
+
+  </div>
+  <div className="modal-body">
+  <form role="form" onSubmit={this.handleSubmit}>
+    <div className={'form-group' + (submitted && !CPF ? ' has-error' : '')}>
+     
+
+      <input className="form-preencher" type="text" name="nome"  id="nome" placeholder="Digite seu nome" value={nome} onChange={this.handleChange}  />
+      {submitted && !nome &&
+                            <div className="help-block">Informe seu Nome</div>
+                        }
+    </div>
+
+    <div className="form-group form-m2">
+     
+    <div className={'form-group-item' + (submitted && !CPF ? ' has-error' : '')} style={{marginRight: '3%'}}>
+
+    <InputMask mask="999.999.999-99" maskChar="" placeholder="XXX.XXX.XXX-XX" type="text" name="CPF" value={CPF} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} placeholder="Digite seu CPF"/>
+    {submitted && !CPF &&
+                            <div className="help-block">Informe seu CPF</div>
+                        }
+    </div>
+
+    <div className={'form-group-item' + (submitted && !CPF ? ' has-error' : '')}>
+
+     <input  type="email" name="email"  id="email" placeholder="Digite seu e-mail" value={email} onChange={this.handleChange}  />
+     {submitted && !email &&
+                            <div className="help-block">Informe seu E-mail</div>
+                        }
+     </div>
+   </div>
+
+
+   <div className="form-group form-m2">
+
+   <div className="form-group-item">
+ 
+ <input  type="text" name="cargo"  id="cargo" placeholder="Digite seu cargo" value={cargo} onChange={this.handleChange}  />
+ </div>
+
+     
+     <div className="form-group-item" style={{marginRight: '3%'}}>
+ 
+     <InputMask mask="(99) 99999-9999" maskChar="" placeholder="(XX) XXXXX-XXXX" type="text" name="telefone" value={telefone} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} placeholder="Digite seu telefone"/>
+     </div>
+ 
+     
+    </div>
+
+    <div className="form-group form-select-div">
+        <div className="form-group-item" style={{marginRight: '3%'}}>
+
+        <select name="estadoSelectedModal" id="estadoSelectedModal" onChange={this.handleChangeEstadoModal} value={estadoSelectedModal} >
+          <option disabled value="">Selecione o estado</option>
+
+          {estados && estados.items && estados.items.map((estado)=> 
+                <option value={estado.uf} key={estado.uf}>{estado.nome}</option>
+          
+          )}
+        </select>
+
+      </div>
+      <div className="form-group-item">
+
+      <select name="cidadeselectedModal" id="cidadeselectedModal" onChange={this.handleChange} value={cidadeselectedModal} >
+        <option disabled value="">Selecione a cidade</option>
+        {estadoSelectedModal && cidadesmodais && cidadesmodais.items && cidadesmodais.items.map((cidade)=> 
+                <option value={cidade.nome} key={cidade.nome}>{cidade.nome}</option>
+          
+          )}
+        </select>
+        </div>
+   </div>
+
+   <div className={'form-group' + (submitted && !CPF ? ' has-error' : '')}>
+     
+     <input className="form-preencher" type="text" name="codigo"  id="codigo" placeholder="Digite o código da empresa" value={codigo} onChange={this.handleChange} />
+     {submitted && !codigo &&
+                            <div className="help-block">Informe seu Código da empresa</div>
+                        }
+   </div>
+  
+  </form>
+  </div>
+
+  <div className="modal-footer modal-footer-preencher-form">
+    <a onClick={this.ClearInputs} >Limpar dados</a>
+    <button type="submit" onClick={this.continuarStep1} className="btn btn-primary btn-inscricao-from" >Continuar
+    {loading &&                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+}
+    </button>
+
+
+                    
+
+  </div>
+  <div className="modal-link">
+  <img src="../../public/images/prencher-login.svg" onClick={this.setPreencherLogin} className="link-prencher-login"/>
+
+  </div>
+</div>
+
+
+</div>
+
+    }
+
+{!modeLogin &&  step && step == '2'  &&  <div className="modal-dialog modal-dialog-centered" role="document">
+
+<div className="modal-content">
+<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" className="btn-close">×</span>
+                      </button>
+  <div className="modal-header">
+    
+
+    <img src="../../public/images/onboarding-part2.svg" className="svg-onboarding"/>
+
+
+    <h5 className="modal-title" >Selecione os módulos da turma {turmaSelected && turmaSelected.curTurmaGrupo} que você deseja participar</h5>
+
+  </div>
+  <div className="modal-body">
+  <form role="form" onSubmit={this.handleSubmit}>
+    <div className="form-group">
+
+    {turmaSelected.curTurmas && turmaSelected.curTurmas.map((cur,index)=> 
+        <div className="item-turmas-div"  key={index}>
+        <input id={`modulos-checkbox-${index}`} name={cur.curTurma.modulo} type="checkbox"
+        value={cur.curTurma.idTurma}
+        onChange={() => this.handleOnChangeCheckBox(cur.curTurma.idTurma)}/>
+
+          <p key={index}><b>Módulo {cur.curTurma.modulo}</b> - {cur.curTurma.dataInicioFormat} - {cur.curTurma.horaInicioFormat} às {cur.curTurma.horaFinalFormat} </p>
+        </div>
+                        )}
+     
+</div>
+  
+  </form>
+  </div>
+
+  <div className="modal-footer modal-footer-preencher-form">
+    <button type="submit" onClick={this.continuarStep2} className="btn btn-primary btn-inscricao-from" >Continuar
+    {loading &&                             <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+}
+    </button>
+
+
+                    
+
+  </div>
+  <div className="modal-link">
+  <img src="../../public/images/prencher-login.svg" onClick={this.setPreencherLogin} className="link-prencher-login"/>
+
+  </div>
+</div>
+
+
+</div>
+
+    }
+
+{!modeLogin &&  step && step == '3'  &&  <div className="modal-dialog modal-dialog-centered" role="document">
+
+<div className="modal-content">
+<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" className="btn-close">×</span>
+                      </button>
+  <div className="modal-header">
+    
+
+    <img src="../../public/images/onboarding-part3.svg" className="svg-onboarding"/>
+
+
+    <h5 className="modal-title" >Confirme sua inscrição para a turma {turmaSelected && turmaSelected.curTurmaGrupo}</h5>
+
+  </div>
+  <div className="modal-body">
+  <form role="form" onSubmit={this.handleSubmit}>
+    <div className="form-group div-confirmar-pagamento">
+
+<div>
+    <input type="radio" name="aceitepagamento" value="true" id="aceito" onChange={this.handleChange}/>
+    <label htmlFor="aceito" className="label-regiter-radio">Aceito as condições de pagamento.</label>
+
+</div>
+<div>
+
+     <input type="radio" name="aceitepagamento" value="false" id="notaceito" defaultChecked onChange={this.handleChange}/>
+     <label htmlFor="notaceito" className="label-regiter-radio">Não aceito as condições de pagamento.</label>
+     
+     </div>
+</div>
+  
+  </form>
+  </div>
+
+  <div className="modal-footer modal-footer-preencher-form">
+    <button type="submit" onClick={this.confirmarInscricao} className="btn btn-primary btn-inscricao-from" disabled={submitted}>Confirmar
+    {loading &&  <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+}
+    </button>
+
+
+                    
+
+  </div>
+  <div className="modal-link">
+  <img src="../../public/images/prencher-login.svg" onClick={this.setPreencherLogin} className="link-prencher-login"/>
+
+  </div>
+</div>
+
+
+</div>
+
+    }
+
+
+              </div>
+
+
+
 </div> 
     }
+
+
+    
                     </div> 
 
 

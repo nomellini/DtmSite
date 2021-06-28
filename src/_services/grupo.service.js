@@ -7,7 +7,8 @@ export const grupoService = {
     Delete,
     getBYId,
     FormNotificacaoDisp,
-    getCalendario
+    getCalendario,
+    Inscrever
 };
 
 
@@ -43,6 +44,22 @@ function FormNotificacaoDisp(idTreinamento,nome,estado,cidade,empresa,codigo) {
         .then(nome => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             return JSON.stringify({ idTreinamento,nome,estado,cidade,empresa,codigo });
+        });
+}
+
+
+function Inscrever(idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,cargo,aceitepagamento,modulos) {
+
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify({ idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,cargo,aceitepagamento,modulos })
+    };
+    return fetch(`${config.apiUrl}/v1/CurTreinamentoes/Inscrever/` +idTreinamento, requestOptions)
+        .then(handleResponse)
+        .then(nome => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            return JSON.stringify({ idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,cargo,aceitepagamento,modulos });
         });
 }
 
