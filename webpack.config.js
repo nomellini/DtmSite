@@ -24,7 +24,7 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'https://localhost:5001'
+            apiUrl: 'https://api.datamace.com.br'
         })
     }
 }
