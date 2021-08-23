@@ -20,6 +20,7 @@ import { TreinamentoPage } from '../TreinamentoPage';
 import { ViewTreinamentoPage } from '../TreinamentoPage';
 
 import { LgpdPage } from '../LgpdPage';
+import { LgpdHomePage } from '../LgpdPage';
 
 import { NoticiaPage } from '../NoticiaPage';
 import { ReadNoticiaPage } from '../NoticiaPage';
@@ -73,6 +74,8 @@ class App extends React.Component {
                                 <Route path="/noticia-read" component={ReadNoticiaPage} />
 
                                 <Route exact path="/lgpd" component={LgpdPage} />
+
+                                <Route exact path="/lgpd-home" component={LgpdHomePage} />
                                 
                                 <Route path="/login" component={LoginPage} />
                                 <CookieBanner
