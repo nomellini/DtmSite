@@ -53,7 +53,7 @@ handleSubmit(e) {
         var formulario= $("#botaoentrar");
         formulario.css({'background': '#135CA1'});
         $(".input-text").css({"border": "1px solid #253858"});
-        dispatch(userActions.login(username, password,Email));
+        dispatch(userActions.login(Email, password));
     }else{
         var formulario= $("#botaoentrar");
         formulario.css({'background': 'rgba(0,0,0,0.10000000149011612)'});
