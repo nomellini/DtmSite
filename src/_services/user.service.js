@@ -4,7 +4,9 @@ import { authHeader } from '../_helpers';
 export const userService = {
     login,
     logout,
-    getAll
+    getAll,
+    atualizar,
+    updatePwd
 };
 
 function login(username, password) {
@@ -54,4 +56,36 @@ function handleResponse(response) {
 
         return data;
     });
+}
+
+
+function atualizar(user) {
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify(user)
+    };
+    return fetch(`${config.apiUrl}/v1/CurUsuarios/` +user.idUsuario, requestOptions)
+        .then(handleResponse)
+        .then(user => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            return JSON.stringify(user);
+        });
+}
+
+
+function updatePwd(idUsuario,senha,novasenha,confirmacaosenha) {
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify({senha,novasenha,confirmacaosenha})
+    };
+    return fetch(`${config.apiUrl}/v1/CurUsuarios/UpdateSenha?id=` +idUsuario, requestOptions)
+        .then(handleResponse)
+        .then(idUsuario => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            return JSON.stringify({senha,novasenha,confirmacaosenha});
+        });
 }

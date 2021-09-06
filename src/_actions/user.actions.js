@@ -6,7 +6,9 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
-    getAll
+    getAll,
+    atualizar,
+    updatePwd
 };
 
 function login(username, password) {
@@ -33,6 +35,7 @@ function login(username, password) {
 
 function logout() {
     userService.logout();
+    history.push('/lgpd');
     return { type: userConstants.LOGOUT };
 }
 
@@ -50,4 +53,47 @@ function getAll() {
     function request() { return { type: userConstants.GETALL_REQUEST } }
     function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+}
+
+
+function atualizar(user) {
+    return dispatch => {
+        dispatch(request({ user }));
+
+        userService.atualizar(user)
+            .then(
+                idTreinamento => { 
+                    dispatch(success(user));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error("Erro ao atualizar"));
+                }
+            );
+    };
+
+    function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
+    function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
+}
+
+function updatePwd(idUsuario,senha,novasenha,confirmacaosenha) {
+    return dispatch => {
+        dispatch(request({ idUsuario }));
+
+        userService.updatePwd(idUsuario,senha,novasenha,confirmacaosenha)
+            .then(
+                idTreinamento => { 
+                    dispatch(success(idUsuario));
+                },
+                error => {
+                    dispatch(failure(error));
+                    dispatch(alertActions.error("Erro ao atualizar"));
+                }
+            );
+    };
+
+    function request(idUsuario) { return { type: userConstants.CREATE_REQUEST, idUsuario } }
+    function success(idUsuario) { return { type: userConstants.CREATE_SUCCESS, idUsuario } }
+    function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,10 +9,9 @@ class LgpdHomePage extends React.Component {
         super(props);
 
         // reset login status
-        // this.props.dispatch(userActions.logout());
+
 
         const { user, users } = this.props;
-        console.log(user);
         this.state = {
             username: '',
             password: '',
@@ -27,12 +26,21 @@ class LgpdHomePage extends React.Component {
             senha: '',
             novasenha: '',
             confirmacaosenha: '',
-            submitted: false
+            submitted: false,
+            type: 'curtreinamento.nome',
+            types: {
+                Curso: 'curtreinamento.nome',
+                Data: 'curturmas.dataInicio',
+            }
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.editValue = this.editValue.bind(this);
+        this.sortArray = this.sortArray.bind(this);
+        this.handleSubmitSenha = this.handleSubmitSenha.bind(this);
+
+        
     }
 
     editValue(valueEdit) {
@@ -46,48 +54,87 @@ class LgpdHomePage extends React.Component {
         this.setState({ [name]: value });
 
         const { username, password, Email } = this.state;
-
-        if (Email && password) {
-            var formulario = $("#botaoentrar");
-            formulario.css({ 'background': '#135CA1' });
-            $(".input-text").css({ "border": "1px solid #253858" });
-
-        } else {
-            var formulario = $("#botaoentrar");
-            formulario.css({ 'background': 'rgba(0,0,0,0.10000000149011612)' });
-            $(".input-text").css({ "border": "1px solid rgba(0,0,0,0.30000001192092896)" });
-
-
-        }
     }
 
     handleSubmit(e) {
         // e.preventDefault();
         this.setState({ submitted: true });
-        const { username, password, Email } = this.state;
-        const { dispatch } = this.props;
-        if (Email && password) {
-            var formulario = $("#botaoentrar");
-            formulario.css({ 'background': '#135CA1' });
-            $(".input-text").css({ "border": "1px solid #253858" });
-            dispatch(userActions.login(Email, password));
-        } else {
-            var formulario = $("#botaoentrar");
-            formulario.css({ 'background': 'rgba(0,0,0,0.10000000149011612)' });
-            $(".input-text").css({ "border": "1px solid rgba(0,0,0,0.30000001192092896)" });
+        const { dispatch ,user} = this.props;
 
+        const { nome,email,cpf,cargo,codigo,empresa,telefone } = this.state;
+
+
+      
+
+        if (user) {
+            user.user.nome =  nome;
+            user.user.email = email;
+            user.user.cpf = cpf;
+            user.user.funcao = cargo;
+            user.user.codigo = codigo;
+            user.user.nomeEmpresa = empresa;
+            user.user.telefone = telefone;
+
+            this.props.dispatch(userActions.atualizar(user.user));
+
+            this.editValue('');
+
+        } else {
+            this.props.dispatch(userActions.logout());
+        }
+    }
+
+
+    
+    handleSubmitSenha(e) {
+        // e.preventDefault();
+        this.setState({ submitted: true });
+        const { dispatch ,user} = this.props;
+
+        const { senha,novasenha,confirmacaosenha } = this.state;
+
+        if (user) {
+       
+
+            this.props.dispatch(userActions.updatePwd(user.user.idUsuario,senha,novasenha,confirmacaosenha));
+
+            this.editValue('');
+
+        } else {
+            this.props.dispatch(userActions.logout());
         }
     }
 
 
     componentDidMount() {
+        const { user, users } = this.props;
+        console.log(user);
+
         // this.props.dispatch(userActions.getAll());
+        if (!user) {
+            this.props.dispatch(userActions.logout());
+        }
+    }
+
+    sortArray(value) {
+
+        this.setState({ type: value });
+
     }
 
     render() {
         const { user, users } = this.props;
-        const { username, password, submitted, editting, nome, email, cpf, cargo, codigo, empresa, telefone, senha, novasenha, confirmacaosenha } = this.state;
+        const { username, password, submitted, editting, nome, email, cpf, cargo, codigo, empresa, telefone, senha, novasenha, confirmacaosenha, type } = this.state;
         var sefThis = this;
+
+        const typs = type.split('.');
+        const typs0 = typs[0];
+        const typs1 = typs[1];
+
+        var listCurso = user.cursos.sort((a, b) => a[typs0][typs1].localeCompare(b[typs0][typs1]));
+
+
+
         return (
             <div >
 
@@ -339,7 +386,12 @@ class LgpdHomePage extends React.Component {
                                         <div className="row">
                                             <div className="col-md-12">
                                                 <label className="label-perfil-cadastro">Usuário</label>
-
+                                                
+                                            </div>
+                                        </div>
+                                        <div className="row item-field-edit">
+                                            <div className="col-md-12">
+                                                <input type="text" disabled name="email" value={email}/>
                                             </div>
                                         </div>
 
@@ -363,11 +415,11 @@ class LgpdHomePage extends React.Component {
                                         </div>
                                         <div className="row item-field-edit">
                                             <div className="col-md-12">
-                                                {editting == 'senha' && <input type="text" placeholder='Digite sua senha atual' name="senha" value={senha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
-                                                {editting == 'senha' && <input type="text" placeholder='Digite sua nova senha' name="senha" value={novasenha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
-                                                {editting == 'senha' && <input type="text" placeholder='Confirme sua nova senha' name="senha" value={confirmacaosenha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
+                                                {editting == 'senha' && <input type="password" placeholder='Digite sua senha atual' name="senha" value={senha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
+                                                {editting == 'senha' && <input type="password" placeholder='Digite sua nova senha' name="novasenha" value={novasenha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
+                                                {editting == 'senha' && <input type="password" placeholder='Confirme sua nova senha' name="confirmacaosenha" value={confirmacaosenha} onPaste={this.handleChange} onInput={this.handleChange} onChange={this.handleChange} />}
 
-                                                {editting == 'senha' && <a className="page-body-lgpd-btn" onClick={this.handleSubmit}>Atualizar senha</a>}
+                                                {editting == 'senha' && <a className="page-body-lgpd-btn" onClick={this.handleSubmitSenha}>Atualizar senha</a>}
 
                                             </div>
                                         </div>
@@ -379,11 +431,74 @@ class LgpdHomePage extends React.Component {
                                 <div className="page-body-lgpd-titulo-inicial">
                                     <b>Direito de Acesso e Correção </b> &nbsp;&nbsp;Art. 18, II e III - LGPD
                                 </div>
+                                <div className="page-body-lgpd-content">
+                                    <div className="page-body-lgpd-item-list">
+                                        <div className="page-body-lgpd-item-list-filter">
+                                            Ordenar por
+                                            <select onChange={(e) => this.sortArray(e.target.value)}>
+                                                <option value="curtreinamento.nome">Curso</option>
+                                                <option value="curturmas.dataInicio">Data</option>
+                                            </select>
+                                        </div>
+
+                                        {listCurso.map(curso => (
+                                            <div id="cursosrealizados" key={curso.curturmas.idTurma}>
+                                                <div>
+                                                    <label>Curso</label>
+                                                    <div className="info">{curso.curtreinamento.nome}</div>
+
+                                                    <div className="status">
+
+
+
+                                                        <div>{curso.curusuariosturmas.aprovado == true ?
+                                                            (<span><img src="../public/images/icon-feito.svg" /> Confirmado</span>) :
+                                                            (<span><img src="../public/images/icon-fechar.svg" /> Não Confirmado`</span>)
+                                                        }
+                                                        </div>
+
+                                                        <div>{curso.curusuariosturmas.aprovado == true ?
+                                                            (<span><img src="../public/images/icon-feito.svg" />  Aprovado</span>) :
+                                                            (<span><img src="../public/images/icon-fechar.svg" />Reprovado</span>)
+                                                        }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+
+                                                    <label>Data</label>
+
+                                                    <div className="info">{curso.curturmas.dataInicioFormat}</div>
+                                                </div>
+
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                             {/* atividadesdoperfil */}
                             <div className="tab-pane fade" id="atividadesdoperfil" role="tabpanel" aria-labelledby="atividadesdoperfil-tab">
                                 <div className="page-body-lgpd-titulo-inicial">
                                     <b>Registro das operações de tratamento de dados pessoais </b> &nbsp;&nbsp;Art. 37 - LGPD
+                                </div>
+                                <div className="page-body-lgpd-content">
+                                    {user.logs.map((datalogs,index) => (
+                                        <div className="page-body-lgpd-item-list atividades-perfil" key={index}>
+
+                                            <p key={datalogs.dataForma}>{datalogs.dataForma}</p>
+
+                                            {datalogs.dataLogs.map((log,index) => (
+                                                <div className="atividades-perfil-info" key={index}>
+                                                    <span className="hora">{log.hora}</span>
+                                                    <span className="texto">{log.texto}</span>
+                                                </div>
+
+                                            ))}
+
+                                        </div>
+
+                                    ))}
+
                                 </div>
                             </div>
                             {/* downloaddedados */}

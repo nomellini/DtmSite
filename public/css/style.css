@@ -58,6 +58,23 @@
 
 }
 
+@media only screen and (max-width: 600px) {
+
+.dropdown-menu .show{
+
+    width: 70%;
+
+}
+    .btn-menu-treinamentos {
+        margin: 0px 0px 1em 0px;
+        width: 60%;
+    }
+    .btn-menu-portal-clientes{
+        width: 60%;
+
+    }
+}
+
 .btn-menu-portal-clientes {
     margin: 0px 50px 0px 0px;
 
@@ -213,13 +230,13 @@
 
 
 .row-solucoes {
-    margin-top: 5%;
+    margin-top: 5em;
 }
 
 
 
 .navbar-brand {
-    margin-left: 3%;
+    margin-left: 3em;
 
 }
 
@@ -315,7 +332,7 @@
 
 
 .div-sobre-grupo-datamace {
-    margin-top: 5%;
+    margin-top: 5em;
     margin-left: 3%;
     margin-right: 3%;
     height: 100%;
@@ -325,7 +342,7 @@
 
 
 .div-sobre-grupo-datamace-text {
-    margin-top: 10%;
+    margin-top: 3em;
     padding-right: 20%;
 }
 
@@ -378,7 +395,7 @@
 
 
 .div-e-social {
-    margin-top: 5%;
+    margin-top: 5em;
     margin-left: 3%;
     margin-right: 3%;
     height: 128px;
@@ -470,7 +487,7 @@
 
 
 .div-noticias {
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -565,7 +582,7 @@
 }
 
 .card-noticias-a {
-    margin-top: 12%;
+    margin-top: 12em;
 
 }
 
@@ -631,10 +648,29 @@
 
 
 .div-entre-em-contato {
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
 
+}
+
+@media only screen and (max-width: 600px) {
+    .div-entre-em-contato {
+
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+
+    .div-entre-em-contato .col-md-6 {
+        margin-left: 0%;
+        margin-right: 0%;
+
+    }
+
+    .div-entre-em-contato-text {
+        margin-left: 3% !important;
+        margin-right: 3% !important;
+    }
 }
 
 .div-entre-em-contato .col-md-6 {
@@ -659,6 +695,12 @@
     /* Gray / 900 */
     color: #253858;
     width: 90%;
+}
+
+@media only screen and (max-width: 600px) {
+    .div-entre-em-contato p {
+        width: 100%;
+    }
 }
 
 #sejaparceiro .modal-header,
@@ -733,7 +775,7 @@
 
     /* Gray / 900 */
     color: #253858;
-    margin-top: 5%;
+    margin-top: 5em;
 }
 
 
@@ -747,7 +789,7 @@
 
     /* Gray / 900 */
     color: #253858 !important;
-    margin-top: 10%;
+    margin-top: 3em;
     width: 100%;
 
 
@@ -958,7 +1000,7 @@
 
 
 .footer {
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
     /* Blue / 500 */
@@ -1012,7 +1054,7 @@
 }
 
 .footer .footer-address {
-    margin-top: 3%;
+    margin-top: 3em;
 
 }
 
@@ -1312,7 +1354,7 @@
 
 
 .div-nav-rh {
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
 
@@ -1351,6 +1393,21 @@
     margin-top: 2.5%;
     width: 50%;
 
+}
+
+@media only screen and (max-width: 600px) {
+
+
+    .div-nav-view-treinamento {
+        margin: 0px;
+        margin-top: 2.5%;
+        width: 100%;
+
+    }
+
+    .div-btn-inscrever button {
+        width: 100% !important;
+    }
 }
 
 .div-nav-rh .hs {
@@ -1466,7 +1523,7 @@
 
 
 .div-rh-info {
-    margin-top: 3%;
+    margin-top: 3em;
     display: grid !important;
     grid-template-columns: 50% 50%;
 
@@ -1575,6 +1632,13 @@
     grid-template-rows: minmax(42px, 1fr);
     overflow: auto;
     overflow-y: hidden;
+}
+
+@media only screen and (max-width: 600px) {
+    .hs-solucao-home {
+        grid-template-columns: repeat(var(--total), calc(80%));
+    }
+
 }
 
 
@@ -1693,7 +1757,7 @@
 
 
 .div-cadastro-titular-dados {
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
 
@@ -1750,8 +1814,16 @@
     /* padding: 6% 7% 0% 7%; */
 }
 
+@media only screen and (max-width: 600px) {
+    .div-lgpd-login form {
+        margin: 0%;
+    }
+}
+
+
+
 .div-lgpd-login label {
-    margin-top: 5%;
+    margin-top: 1em;
 
     /* Login */
 
@@ -1804,7 +1876,7 @@
     background-position: center center;
     height: 40px;
     background-size: cover;
-    margin-top: 12%;
+    margin-top: 5em;
     margin-bottom: 6%;
 
     border: none;
@@ -1817,7 +1889,7 @@
 .div-form-end a {
     /* Esqueci minha senha */
 
-    margin-top: 12%;
+    margin-top: 12em;
 
     font-style: normal;
     font-weight: normal;
@@ -1836,7 +1908,7 @@
 
 .div-noticias-topo {
 
-    margin-top: 3%;
+    margin-top: 3em;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -1869,7 +1941,7 @@
 
 
 .div-noticias-topo-large p {
-    margin-top: 3%;
+    margin-top: 3em;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -2009,7 +2081,7 @@
 
 .div-noticias-list {
 
-    margin-top: 5%;
+    margin-top: 5em;
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -2106,7 +2178,7 @@
     background: #135CA1;
     border-radius: 8px;
 
-    margin-top: 2%;
+    margin-top: 2em;
     margin-left: 3%;
     margin-right: 3%;
 
@@ -2166,7 +2238,7 @@
 }
 
 .div-not-read-content p {
-    margin-top: 7%;
+    margin-top: 7em;
 }
 
 
@@ -2330,12 +2402,21 @@
     grid-template-columns: repeat(var(--total), calc(33.333%));
 }
 
+@media only screen and (max-width: 600px) {
+
+    .div-noticias .hs-solucao-home {
+
+        grid-template-columns: repeat(var(--total), calc(83.333%));
+    }
+}
+
+
 .div-noticias .div-home-scroll-tabs {
     grid-template-columns: 0% 1fr 0%;
 }
 
 .treinamento-read .div-informacoes {
-    margin-top: 2%;
+    margin-top: 2em;
     display: grid;
     grid-template-columns: auto auto;
     gap: 15%;
@@ -2410,7 +2491,7 @@
 
     /* Gray / 200 */
     border: 1px solid #ECEDEE;
-    margin-top: 5%;
+    margin-top: 5em;
 
 }
 
@@ -2436,7 +2517,7 @@
 
 .text-conteudo {
 
-    margin-top: 2.5%;
+    margin-top: 2.5em;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -2538,7 +2619,7 @@
 
 .view-treinamento-calendario .modal-title {
 
-    margin-top: 5%;
+    margin-top: 5em;
 }
 
 .view-treinamento-calendario .modal-content {
@@ -2661,7 +2742,7 @@
 
     padding: 3%;
     margin-bottom: 3%;
-    margin-top: 3%;
+    margin-top: 3em;
 
 
 }
@@ -2951,7 +3032,7 @@
 
 
 #inscricaoonline .modal-footer {
-    margin-top: 2%;
+    margin-top: 2em;
     padding-top: 0%;
     width: 100%;
     /* height: 32px; */
@@ -3042,7 +3123,7 @@
 
 #inscricaoonline .input-group-register {
     width: 100%;
-    margin-top: 5%;
+    margin-top: 5em;
     height: 60px;
 
 }
@@ -3097,7 +3178,7 @@
 
 
 #inscricaoonline .modal-footer .msg-erro {
-    margin-top: -8%;
+    margin-top: -8em;
     /* margin-bottom: 5%; */
 }
 
@@ -3140,7 +3221,7 @@
 
 
 #inscricaoonline .modal-footer .div-preecher-form {
-    margin-top: 5%;
+    margin-top: 5em;
     display: grid;
     grid-template-columns: 90% 10%;
     float: left;
@@ -3207,7 +3288,7 @@
     align-items: center;
     justify-content: center;
     gap: 30px;
-    margin-top: 4%;
+    margin-top: 4em;
 }
 
 #inscricaoonline .div-confirmar-pagamento label {
@@ -3264,7 +3345,7 @@
 align-items: center;
 vertical-align: middle;
 justify-content: center; */
-    margin-top: 1%;
+    margin-top: 1em;
 
 }
 
@@ -3286,7 +3367,7 @@ justify-content: center; */
 
     /* Gray / 900 */
     color: #253858;
-    margin-top: 10%;
+    margin-top: 3em;
     padding-right: 50%;
     margin-bottom: 5%;
 
@@ -3326,7 +3407,7 @@ justify-content: center; */
 }
 
 .page-body-lgpd {
-    margin-top: 3%;
+    margin-top: 3em;
 }
 
 
@@ -3335,6 +3416,24 @@ justify-content: center; */
     grid-column: 1;
 
 
+}
+
+@media only screen and (max-width: 600px) {
+
+
+    .page-body-lgpd .div-rh-scroll-tabs>* {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto;
+        gap: 0.5em;
+    }
+
+    .page-body-lgpd .div-rh-scroll-tabs {
+        overflow: auto;
+    }
+
+    .page-body-lgpd .div-rh-scroll-tabs a {
+        white-space: nowrap;
+    }
 }
 
 .page-body-lgpd .nav-tabs {
@@ -3394,7 +3493,7 @@ justify-content: center; */
 
 
 .page-body-lgpd-content {
-    margin-top: 10%;
+    margin-top: 3em;
 
 }
 
@@ -3481,6 +3580,10 @@ justify-content: center; */
     padding-bottom: 5%;
 }
 
+.item-perfil-cadastro a:hover {
+    cursor: pointer;
+}
+
 .item-perfil-cadastro input:focus-visible {
 
     outline: 0px;
@@ -3514,8 +3617,193 @@ justify-content: center; */
 
 
 .item-perfil-cadastro .item-field-edit {
-    margin-top: 3%;
+    margin-top: 3em;
     height: 75px;
+
+
+}
+
+
+.page-body-lgpd-content .page-body-lgpd-item-list #cursosrealizados {
+    display: grid;
+    grid-template-columns: 70% 30%;
+
+    /* Gray / 200 */
+    border-bottom: 1px solid #ECEDEE;
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+}
+
+
+.page-body-lgpd-content .page-body-lgpd-item-list #cursosrealizados label {
+    /* Curso */
+
+    /* Label / Regular */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+    /* Gray / 500 */
+    color: #97A0AF;
+
+
+
+}
+
+.page-body-lgpd-content .page-body-lgpd-item-list #cursosrealizados .info {
+
+    /* Nome do curso */
+    margin-top: 1em;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    /* Gray / 900 */
+    color: #253858;
+
+
+}
+
+.page-body-lgpd-content .page-body-lgpd-item-list #cursosrealizados .status {
+    margin-top: 1.5em;
+    /* Confirmado */
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+    /* Gray / 900 */
+    color: #253858;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1em;
+
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .page-body-lgpd-content .page-body-lgpd-item-list #cursosrealizados .status {
+        white-space: nowrap;
+    }
+}
+
+.page-body-lgpd-item-list .page-body-lgpd-item-list-filter select {
+
+    margin-left: 0.8em;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    /* identical to box height */
+
+    /* Gray / 900 */
+    color: #253858;
+
+
+    /* Inside Auto Layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 8px;
+    border: none;
+
+}
+
+
+.page-body-lgpd-item-list .page-body-lgpd-item-list-filter {
+    margin-bottom: 3em;
+}
+
+.page-body-lgpd-item-list .page-body-lgpd-item-list-filter select {
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #253858;
+
+}
+
+
+.page-body-lgpd-item-list .page-body-lgpd-item-list-filter select:focus-visible {
+
+    outline: 0px;
+}
+
+.atividades-perfil {
+
+    /* divider */
+
+
+    /* Gray / 200 */
+    border-bottom: 1px solid #ECEDEE;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+
+}
+
+.atividades-perfil p {
+    /* Quarta-feira 09 de março de 2021 */
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    /* Gray / 900 */
+    color: #253858;
+
+    margin-bottom: 2em;
+
+
+}
+
+
+.atividades-perfil .atividades-perfil-info {
+
+    display: grid;
+    grid-template-columns: 10% 80%;
+    gap: 2em;
+    margin-bottom: 1em;
+}
+
+.atividades-perfil .hora {
+
+    /* 18:53 */
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    /* Gray / 500 */
+    color: #97A0AF;
+
+
+}
+
+.atividades-perfil .texto {
+    /* Acessou a conta */
+
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    /* Gray / 900 */
+    color: #253858;
+
 
 
 }
