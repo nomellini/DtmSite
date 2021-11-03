@@ -25,7 +25,7 @@ class SolucaoRhFolhaPagamentoPage extends React.Component {
           el.style.setProperty('--total', n);
         });
 
-if(solucaos.items){
+    if(solucaos.items){
         var root = document.documentElement;
             const lists = document.querySelectorAll('.hs');
             lists.forEach(el => {
