@@ -11,6 +11,7 @@ import { estados } from './estados.reducer';
 import { cidades } from './cidades.reducer';
 import { cidadesmodais } from './cidades.reducer';
 import { solucaos } from './solucaos.reducer';
+import { solucaosnew } from './solucaosnew.reducer';
 import { calendarios } from './calendarios.reducer';
 
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   noticias,
   estados,
   cidades,
-  cidadesmodais
+  cidadesmodais,
+  solucaosnew
 });
 
 export default rootReducer;

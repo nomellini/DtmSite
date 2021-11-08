@@ -1,15 +1,16 @@
 * {
     font-family: Open Sans;
-
-
 }
+
+
 
 ::-webkit-scrollbar-track {
     /* background-color: #F4F4F4; */
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
+    display: none   ;
+    /* width: 6px; */
     /* background: #F4F4F4; */
 }
 
@@ -128,6 +129,7 @@
 
 .carousel-inner {
     background: #135CA1;
+    height: 560px;
 
 }
 
@@ -267,7 +269,9 @@
 
     /* Gray / 900 */
     color: #253858;
-
+    position: absolute;
+    bottom: 10px;
+    left: 16px;
 }
 
 
@@ -791,7 +795,7 @@
     color: #253858 !important;
     margin-top: 3em;
     width: 100%;
-
+    margin-right: -288px;
 
     text-align: center;
 
@@ -1185,7 +1189,7 @@
 
 .div-empresa-politica-qualidade-gallery {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33.6% 33.6% 33.6%;
 }
 
 .div-empresa-politica-qualidade-gallery div {
@@ -2332,13 +2336,13 @@
 
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 0.9em;
     line-height: 23px;
     /* or 164% */
 
     /* Gray / 900 */
     color: #253858;
-
+    height: 75%;
 
 }
 
@@ -3271,7 +3275,7 @@
 
     display: grid;
     grid-auto-flow: column;
-    align-items: center;
+    /* align-items: baseline; */
     justify-content: center;
     gap: 10px;
 }
@@ -3806,4 +3810,27 @@ justify-content: center; */
 
 
 
+}
+
+
+.card-body{
+height: 400px;
+    min-width: 100%;
+}
+
+.svg-scroll{
+
+    position: absolute;
+    height: 62px;
+    top: -10px;
+}
+
+
+.svg-scroll-avancar{
+    right: -10px;
+}
+
+.svg-scroll-voltar{
+    left: -10px;
+display: none;
 }

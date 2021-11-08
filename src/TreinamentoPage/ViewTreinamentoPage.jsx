@@ -268,7 +268,7 @@ console.log("this.state.modulos",this.state.modulos);
                {first &&
                               
 
-<div className="row div-sobre-grupo-datamace div-empresa-quem-somos-fundacao div-not-read-content treinamento-read">
+<div className="row div-sobre-grupo-datamace div-empresa-quem-somos-fundacao treinamento-read">
                <div className="col-md-6 div-sobre-grupo-datamace-text">
                  <img src="../public/images/icon-voltar.svg"/>
                <a href={`/treinamentos`}>Voltar para Treinamentos</a>

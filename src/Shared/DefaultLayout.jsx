@@ -54,7 +54,7 @@ class DefaultLayout extends React.Component {
                          <a className="dropdown-item" href="/solucoes-portal-colaboracao">Portais de colaboração</a>
                           <a className="dropdown-item" href="/solucao-on-demand">Soluções On Demand</a>
                           <a className="dropdown-item" href="/solucoes-servico-cliente">Serviços ao cliente</a>
-                          <a className="dropdown-item" href="http://www.guiaesocial.com.br/">Plataforma eSocial</a>
+                          <a className="dropdown-item" href="http://www.guiaesocial.com.br/" target="_blank">Plataforma eSocial</a>
                        
                       </div>
                     </li>

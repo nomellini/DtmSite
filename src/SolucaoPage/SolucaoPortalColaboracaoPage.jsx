@@ -25,6 +25,51 @@ class SolucaoPortalColaboracaoPage extends React.Component {
           el.style.setProperty('--total', n);
         });
 
+        $('.svg-scroll-avancar').click(function(){
+          var move = document.getElementById('myTab').scrollLeft+ 340;
+
+
+        
+
+            $('#myTab').animate({scrollLeft: move},'fast');    
+
+            var el = document.getElementById('myTab');
+
+            var max = el.scrollWidth - el.clientWidth;
+
+            var max_value = $('#myTab').scrollLeft(); // returns 300
+            if(max_value == max){
+              $('.svg-scroll-avancar').hide();
+            }
+            if(max_value >0 ){
+              $('.svg-scroll-voltar').show();
+
+            }
+        });
+
+
+        $('.svg-scroll-voltar').click(function(){
+          var move = document.getElementById('myTab').scrollLeft- 340;
+         
+
+            $('#myTab').animate({scrollLeft: move},'fast');   
+
+            var el = document.getElementById('myTab');
+
+            var max = el.scrollWidth - el.clientWidth;; 
+  
+            var max_value = $('#myTab').scrollLeft(); // returns 300
+
+            if(max_value < max){
+              $('.svg-scroll-avancar').show();
+            }
+
+            if(max_value == 0 ){
+              $('.svg-scroll-voltar').hide();
+
+            }
+        });
+
 if(solucaos.items){
         var root = document.documentElement;
             const lists = document.querySelectorAll('.hs');
@@ -72,6 +117,8 @@ if(solucaos.items){
             <div className="row div-nav-rh">
             <div className="col-md-12">
               <div className="div-rh-scroll-tabs">
+              <img  src="../public/images/icon-voltar-scroll.svg" className="svg-scroll svg-scroll-voltar" />
+
             {solucaos && solucaos.error && <span className="text-danger">ERROR: {solucaos.error}</span>}
             <ul className="nav nav-tabs hs hs-portal-colaboracao" id="myTab" role="tablist">
             {solucaos && solucaos.items && solucaos.items.map((solucao)=> 
@@ -84,6 +131,8 @@ if(solucaos.items){
                             )}
          
         </ul>
+        <img  src="../public/images/icon-avancar.svg" className="svg-scroll svg-scroll-avancar" />
+
         </div>
 
         <div className="tab-content" id="myTabContent">

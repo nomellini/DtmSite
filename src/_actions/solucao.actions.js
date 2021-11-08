@@ -8,7 +8,8 @@ export const solucaoActions = {
     Delete,
     Create,
     GetTbSolucaoBYSlug,
-    getAllParent
+    getAllParent,
+    GetTbSolucaoBYSlugNew
 };
 
 function Delete(Id) {
@@ -83,6 +84,23 @@ function GetTbSolucaoBYSlug(slug) {
     function request() { return { type: solucaoConstants.GETALL_REQUEST } }
     function success(solucaos) { return { type: solucaoConstants.GETALL_SUCCESS, solucaos } }
     function failure(error) { return { type: solucaoConstants.GETALL_FAILURE, error } }
+}
+
+
+function GetTbSolucaoBYSlugNew(slug) {
+    return dispatch => {
+        dispatch(request());
+
+        solucaoService.GetTbSolucaoBYSlug(slug)
+            .then(
+                solucaosnew => dispatch(success(solucaosnew)),
+                error => dispatch(failure(error))
+            );
+    };
+
+    function request() { return { type: solucaoConstants.NEW_GETALL_REQUEST } }
+    function success(solucaosnew) { return { type: solucaoConstants.NEW_GETALL_SUCCESS, solucaosnew } }
+    function failure(error) { return { type: solucaoConstants.NEW_GETALL_FAILURE, error } }
 }
 
 
