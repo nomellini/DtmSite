@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "webpack serve --config webpack.prod.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js --disable-host-check  --host 0.0.0.0 "
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
