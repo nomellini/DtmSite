@@ -25,6 +25,6 @@ stages:
         containerRegistry: 'vps24790'
         repository: 'gdassie/siteinstitucional'
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile.prod'
         tags: |
           $(tag)
