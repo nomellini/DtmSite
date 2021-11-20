@@ -165,7 +165,7 @@ class HomePage extends React.Component {
             <h3>
               Saiba como atender as exigências do eSocial.
             </h3>
-            <a type="button" className="btn btn-success" href="http://www.guiaesocial.com.br/">
+            <a type="button" className="btn btn-success" href="http://www.guiaesocial.com.br/"  target="_blank">
               Acessar eSocial
             </a>
           </div>

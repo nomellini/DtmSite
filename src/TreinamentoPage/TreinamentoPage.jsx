@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { grupoActions } from '../_actions';
+import { solucaoActions } from '../_actions';
 
+import Parser from 'html-react-parser';
 class TreinamentoPage extends React.Component {
 
   constructor(props) {
@@ -23,6 +25,8 @@ class TreinamentoPage extends React.Component {
     componentDidMount() {
          this.props.dispatch(grupoActions.getAll());
          this.props.dispatch(grupoActions.getCalendario());
+         this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Treinamentos"));
+
 
     }
     componentDidUpdate(){
@@ -57,7 +61,7 @@ class TreinamentoPage extends React.Component {
     }
 
     render() {
-        const { user, users,grupos,calendarios } = this.props;
+        const { user, users,grupos,calendarios,solucaos } = this.props;
 
 
         
@@ -69,8 +73,8 @@ class TreinamentoPage extends React.Component {
                 <h2>
                 Desenvolvimento Profissional                            </h2>
                 <p>
-                Conheça a Datamace. A empresa que Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                </p>
+                {solucaos && solucaos.items && solucaos.items[0].titulo}
+                                </p>
               </div>
               <div className="col-md-6 div-sobre-grupo-datamace-img">
               <div className="row footer-redes-sociais">
@@ -93,17 +97,11 @@ class TreinamentoPage extends React.Component {
               </div>
             </div>
 
-               <div className="row div-sobre-grupo-datamace div-empresa-quem-somos-fundacao">
-               <div className="col-md-6 div-sobre-grupo-datamace-text">
-               </div>
-              <div className="col-md-6 div-sobre-grupo-datamace-text">
-              {/* <h6> Desenvolvimento Pessoal</h6> */}
+            {solucaos && solucaos.items && solucaos.items.map((solucao)=> 
+            
+            <div key='0'>{Parser(solucao.conteudo)}</div>
 
-                <p>
-                Com o objetivo focado no desenvolvimento pessoal e profissional dos nossos usuários, a divisão de Treinamento mantém um calendário anual de treinamento, realizado no centro de treinamento da Datamace, onde, todos os cursos são ministrados por instrutores com profundo conhecimento das melhores práticas em Gestão de Pessoas.                </p>
-              </div>
-              
-            </div> 
+        )}
            
             <div className="row div-e-social div-e-social-servicos-clientes">
               <div className="col-md-6">
@@ -195,13 +193,13 @@ class TreinamentoPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication,grupos,calendarios } = state;
+    const { users, authentication,grupos,calendarios,solucaos } = state;
     const { user } = authentication;
     return {
         user,
         users
         ,grupos,
-        calendarios
+        calendarios,solucaos
     };
 }
 

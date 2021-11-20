@@ -93,9 +93,7 @@ class App extends React.Component {
         return (
             <div >
 
-                {alert.message &&
-                    <div className={`alert ${alert.type}`}>{alert.message}</div>
-                }
+                
 
                 <Router history={history}>
                         <div>

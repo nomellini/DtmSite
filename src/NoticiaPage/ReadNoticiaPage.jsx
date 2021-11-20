@@ -12,7 +12,6 @@ import queryString from 'query-string';
 
 class ReadNoticiaPage extends React.Component {
     componentDidMount() { 
-s      
        let params = queryString.parse(this.props.location.search)
 
 
