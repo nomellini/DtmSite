@@ -44,7 +44,6 @@ class LgpdHomePage extends React.Component {
     }
 
     editValue(valueEdit) {
-        console.log(valueEdit);
         this.setState({ editting: valueEdit });
 
     }
@@ -108,7 +107,6 @@ class LgpdHomePage extends React.Component {
 
     componentDidMount() {
         const { user, users } = this.props;
-        console.log(user);
 
         // this.props.dispatch(userActions.getAll());
         if (!user) {

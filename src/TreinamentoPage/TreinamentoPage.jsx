@@ -26,7 +26,6 @@ class TreinamentoPage extends React.Component {
 
     }
     componentDidUpdate(){
-      console.log("componentDidUpdate");
 
       const { user, users,grupos } = this.props;
 
@@ -40,7 +39,6 @@ class TreinamentoPage extends React.Component {
         var selector = `#hs-solucao-home`+categoria.idCategoria;
         const el = document.querySelector(selector);
         if(el){
-        // console.log(selector,categoria.idCategoria,el)
         const listItems = el.querySelectorAll('li');
         const n = el.children.length;
         var length = grupos.items.curTreinamentos.filter(p => p.idCategoria === categoria.idCategoria).length;

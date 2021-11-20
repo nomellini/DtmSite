@@ -38,7 +38,6 @@ class HomePage extends React.Component {
 
   handleChangeEstado(e) {
     const { name, value } = e.target;
-    console.log("handleChange", name, value);
     this.setState({ [name]: value });
 
     this.props.dispatch(cidadeActions.GetCidadesByUF(value));
@@ -50,7 +49,6 @@ class HomePage extends React.Component {
 
   handleChangeEstadoModal(e) {
     const { name, value } = e.target;
-    console.log("handleChange", name, value);
     this.setState({ [name]: value });
 
     this.props.dispatch(cidadeActions.GetCidadesByUFModal(value));
@@ -59,7 +57,7 @@ class HomePage extends React.Component {
 
   handleChange(e) {
     const { name, value } = e.target;
-    console.log("handleChange", name, value);
+   
     this.setState({ [name]: value });
   }
 

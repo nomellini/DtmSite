@@ -37,7 +37,6 @@ class ViewTreinamentoPage extends React.Component {
     
     
     let params = queryString.parse(this.props.location.search)
-       console.log( params)
 
        this.state = {
         estadoSelectedModal: '',
@@ -75,7 +74,6 @@ class ViewTreinamentoPage extends React.Component {
     }
 
     onClickCardTurma(item){
-        console.log(item);
         this.setState({ turmaSelected: item,submitted: false,msgerroLogin: '',CPF: '',modeLogin: true });
 
 
@@ -85,7 +83,6 @@ class ViewTreinamentoPage extends React.Component {
     componentDidUpdate(){
       const { user, users,grupos,anothersgrupos,estados,cidades,cidadesmodais,loading,sucess } = this.props;
 
-      console.log('componentDidUpdate');
 
 
       if(sucess){
@@ -99,13 +96,11 @@ class ViewTreinamentoPage extends React.Component {
 
     handleChange(e) {
       const { name, value } = e.target;
-      console.log("handleChange",name,value);
       this.setState({ [name]: value,submitted: false, msgerroLogin: ''});
   }
   
       handleChangeEstadoModal(e) {
         const { name, value } = e.target;
-        console.log("handleChange",name,value);
         this.setState({ [name]: value });
 
         this.props.dispatch(cidadeActions.GetCidadesByUFModal(value));
@@ -186,7 +181,6 @@ class ViewTreinamentoPage extends React.Component {
       const { idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,empresa,codigo,telefone,cargo,email,aceitepagamento,modulos,CPF} = this.state;
       const { dispatch } = this.props;
       this.setState({ submitted: true });
-      console.log(idTreinamento ,nome ,estadoSelectedModal ,cidadeselectedModal ,codigo ,CPF ,modulos,aceitepagamento)
       if (idTreinamento && nome && estadoSelectedModal && cidadeselectedModal && codigo && CPF && modulos) {
 
       dispatch(grupoActions.Inscrever(idTreinamento,nome,estadoSelectedModal,cidadeselectedModal,codigo,email,CPF,telefone,cargo,aceitepagamento,modulos));
@@ -229,7 +223,6 @@ handleOnChangeCheckBox = (id) => {
   }
 
   this.setState({ modulos: selected });
-console.log("this.state.modulos",this.state.modulos);
   // setCheckedState(updatedCheckedState);
 
  
@@ -244,7 +237,6 @@ console.log("this.state.modulos",this.state.modulos);
         let first = null;
         let curTurmas = null;
         var sefThis = this;
-        console.log(grupos)
         if(grupos.items && grupos.items.curTreinamentos){
             first = grupos.items.curTreinamentos[0];
             if( grupos.items.curTurmas && grupos.items.curTurmas.length > 0 )

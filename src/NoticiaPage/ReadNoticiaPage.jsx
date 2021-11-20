@@ -12,10 +12,8 @@ import queryString from 'query-string';
 
 class ReadNoticiaPage extends React.Component {
     componentDidMount() { 
-      console.log( this.props)
-      
+s      
        let params = queryString.parse(this.props.location.search)
-       console.log( params)
 
 
     //   const { match: { params } } = this.props;
@@ -26,7 +24,6 @@ class ReadNoticiaPage extends React.Component {
     render() {
         const { user, users,noticias,anothersnoticias } = this.props;
         let first = null;
-        console.log(noticias)
         if(noticias.items ){
 
             first = noticias.items;

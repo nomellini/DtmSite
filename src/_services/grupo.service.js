@@ -19,7 +19,6 @@ function Create(idTreinamento,nome,categoria,descricao,conteudo,sinopse,preco,ca
         headers: authHeader(),
         body: JSON.stringify({ idTreinamento,nome,categoria,descricao,conteudo,sinopse,preco,cargaHoraria,modulos, status,tipo })
     };
-    console.log(requestOptions)
     return fetch(`${config.apiUrl}/v1/CurTreinamentoes` + (idTreinamento !== 0  ? '/'+idTreinamento : ''), requestOptions)
         .then(handleResponse)
         .then(nome => {
@@ -65,7 +64,6 @@ function Inscrever(idTreinamento,nome,estado,cidade,codigo,email,cpf,telefone,ca
 
 
 function Delete(idTreinamento) {
-    console.log(idTreinamento);
     const requestOptions = {
         method: 'DELETE',
         headers: authHeader()
