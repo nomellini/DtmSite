@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { updateSocial } from '../_helpers';
+
 
 import { solucaoActions } from '../_actions';
 
@@ -9,10 +11,17 @@ import Parser from 'html-react-parser';
 class EmpresaNossosParceirosPage extends React.Component {
     componentDidMount() {
       this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Nosso parceiros"));
+
+    }
+    componentDidUpdate(){
+
+      updateSocial();
+
     }
 
     render() {
       const { user, users,solucaos } = this.props;
+
       return (
           <div >
 

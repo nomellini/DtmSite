@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { updateSocial } from '../_helpers';
 
 import { solucaoActions } from '../_actions';
 
@@ -12,7 +13,11 @@ class EmpresaQuemSomosPage extends React.Component {
         this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Quem somos"));
 
     }
+    componentDidUpdate(){
 
+        updateSocial();
+  
+      }
     render() {
         const { user, users,solucaos } = this.props;
         return (

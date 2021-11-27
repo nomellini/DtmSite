@@ -2,23 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateSocial } from '../_helpers';
-
-
 import { solucaoActions } from '../_actions';
-
 import Parser from 'html-react-parser';
 
-class EmpresaPoliticaQualidadePage extends React.Component {
+class EnderecoCampinasPage extends React.Component {
     componentDidMount() {
-      this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Política de qualidade"));
+      this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Unidade Campinas"));
+
     }
     componentDidUpdate(){
 
       updateSocial();
 
     }
+
     render() {
       const { user, users,solucaos } = this.props;
+
       return (
           <div >
 
@@ -46,5 +46,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedEmpresaPoliticaQualidadePage = connect(mapStateToProps)(EmpresaPoliticaQualidadePage);
-export { connectedEmpresaPoliticaQualidadePage as EmpresaPoliticaQualidadePage };
+const connectedEnderecoCampinasPage = connect(mapStateToProps)(EnderecoCampinasPage);
+export { connectedEnderecoCampinasPage as EnderecoCampinasPage };

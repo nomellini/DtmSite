@@ -61,8 +61,25 @@ class DefaultLayout extends React.Component {
                     <li className="nav-item active">
                       <a className="nav-link" href="/noticias">Notícias</a>
                     </li>
-                    <li className="nav-item">
-                      <a className="nav-link" href="/lgpd">LGPD</a>
+                    <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">LGPD</a>
+                      <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a className="dropdown-item" href='/lgpd'>Direitos do Titular</a>
+                        <a className="dropdown-item" href="/lgpd-responsavel">Encarregado de Proteção de Dados (EPD) ou DPO</a>
+                        
+                      </div>
+                    </li>
+                    <li className="nav-item dropdown">
+                      <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">Nossos Endereços</a>
+                      <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a className="dropdown-item" href='/nosso-end-sbc'>Sede do Grupo Datamace</a>
+                        <a className="dropdown-item" href="/nosso-end-campinas">Unidade Campinas</a>
+                        <a className="dropdown-item" href="/nosso-end-rio">Unidade Rio de Janeiro</a>
+                        
+                      </div>
+                    </li>
+                    <li className="nav-item active">
+                      <a className="nav-link" href="/fale-conosco">Fale Conosco</a>
                     </li>
                   </ul>
                 

@@ -2,36 +2,28 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { history } from '../_helpers';
+import { history,updateSocial } from '../_helpers';
 import { alertActions } from '../_actions';
 import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
-import { EmpresaQuemSomosPage } from '../EmpresaPage';
-import { EmpresaPoliticaQualidadePage } from '../EmpresaPage';
-import { EmpresaNossosParceirosPage } from '../EmpresaPage';
-import { EmpresaReconhecimentosPage } from '../EmpresaPage';
+import { EmpresaQuemSomosPage,EmpresaPoliticaQualidadePage,EmpresaNossosParceirosPage,EmpresaReconhecimentosPage } from '../EmpresaPage';
 
-import { SolucaoOnDemandPage } from '../SolucaoPage';
-import { SolucaoServicosClientePage } from '../SolucaoPage';
-import { SolucaoRhFolhaPagamentoPage } from '../SolucaoPage';
-import { SolucaoPortalColaboracaoPage } from '../SolucaoPage';
+import { SolucaoOnDemandPage,SolucaoServicosClientePage,SolucaoRhFolhaPagamentoPage,SolucaoPortalColaboracaoPage } from '../SolucaoPage';
 
-import { TreinamentoPage } from '../TreinamentoPage';
-import { ViewTreinamentoPage } from '../TreinamentoPage';
+import { TreinamentoPage,ViewTreinamentoPage } from '../TreinamentoPage';
 
-import { LgpdPage } from '../LgpdPage';
-import { LgpdHomePage } from '../LgpdPage';
+import { LgpdPage,LgpdHomePage,LgpdResponsavel } from '../LgpdPage';
 
-import { NoticiaPage } from '../NoticiaPage';
-import { ReadNoticiaPage } from '../NoticiaPage';
+import { EnderecoSedePage,EnderecoCampinasPage,EnderecoRioDeJaneiroPage } from '../EnderecoPage';
+
+import { NoticiaPage,ReadNoticiaPage } from '../NoticiaPage';
 import { NotFound } from '../NotFound';
-
-
 
 import { LoginPage } from '../LoginPage';
 import DefaultLayout from '../Shared/DefaultLayout'
 import Footer from '../Shared/Footer'
 import { CookieBanner } from '@palmabit/react-cookie-law';
+import { FaleConoscoPage } from '../FaleConosco';
 
 
 
@@ -45,49 +37,13 @@ class App extends React.Component {
             dispatch(alertActions.clear());
         });
     }
+
+
     componentDidMount() {
-
-    $('img').hover(function () {
-
-        var src = $(this).attr('src');
-        var thisElement = $(this);
-        if(src.indexOf("icon-facebook.svg") !== -1  || src.indexOf("icon-twitter.svg") !== -1 || src.indexOf("icon-linkedin.svg") !== -1 ){
-                thisElement.css('cursor', 'pointer');
-
-        }
-
-    });
-
-
-    $('img').click(function () {
-
-        var src = $(this).attr('src');
-        var thisElement = $(this);
-        if(src.indexOf("icon-facebook.svg") !== -1){
-            window.open('https://www.facebook.com/Datamace', '_blank');
-
-            thisElement.hover(function(){
-                thisElement.css('cursor', 'pointer');
-              });
-
-        }else if(src.indexOf("icon-twitter.svg") !== -1){
-            window.open('https://twitter.com/datamace?s=20', '_blank');
-            thisElement.hover(function(){
-                thisElement.css('cursor', 'pointer');
-              });
-
-        }else if(src.indexOf("icon-linkedin.svg") !== -1){
-            window.open('https://www.linkedin.com/company/datamace-ltda', '_blank');
-            thisElement.hover(function(){
-                thisElement.css('cursor', 'pointer');
-              });
-
-        }
-        // do something
-
-    });
-
+        updateSocial();
     }
+
+    
     render() {
         const { alert } = this.props;
         return (
@@ -123,10 +79,18 @@ class App extends React.Component {
                             <Route path="/noticia-read" component={ReadNoticiaPage} />
 
                             <Route exact path="/lgpd" component={LgpdPage} />
-
                             <Route exact path="/lgpd-home" component={LgpdHomePage} />
+                            <Route exact path="/lgpd-responsavel" component={LgpdResponsavel} />
 
                             <Route path="/login" component={LoginPage} />
+
+                            {/* Nosso enderços */}
+
+                            <Route path="/nosso-end-sbc" component={EnderecoSedePage} />
+                            <Route path="/nosso-end-campinas" component={EnderecoCampinasPage} />
+                            <Route path="/nosso-end-rio" component={EnderecoRioDeJaneiroPage} />
+                            {/* Fale Conosco */}
+                            <Route path="/fale-conosco" component={FaleConoscoPage} />
                             {/* <Route component={NotFound} /> */}
 
                             <CookieBanner

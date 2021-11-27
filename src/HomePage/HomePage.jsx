@@ -26,6 +26,12 @@ class HomePage extends React.Component {
 
   }
 
+  componentDidUpdate(){
+    $('.carousel').carousel();
+
+
+  }
+
   componentDidMount() {
     // this.props.dispatch(userActions.getAll());
     this.props.dispatch(solucaoActions.getAllParent());

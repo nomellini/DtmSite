@@ -8,9 +8,9 @@ import { solucaoActions } from '../_actions';
 
 import Parser from 'html-react-parser';
 
-class EmpresaReconhecimentosPage extends React.Component {
+class EnderecoRioDeJaneiroPage extends React.Component {
     componentDidMount() {
-        this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Reconhecimentos"));
+        this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Unidade Rio de Janeiro"));
       }
       componentDidUpdate(){
 
@@ -46,5 +46,5 @@ class EmpresaReconhecimentosPage extends React.Component {
       };
   }
 
-const connectedEmpresaReconhecimentosPage = connect(mapStateToProps)(EmpresaReconhecimentosPage);
-export { connectedEmpresaReconhecimentosPage as EmpresaReconhecimentosPage };
+const connectedEnderecoRioDeJaneiroPage = connect(mapStateToProps)(EnderecoRioDeJaneiroPage);
+export { connectedEnderecoRioDeJaneiroPage as EnderecoRioDeJaneiroPage };

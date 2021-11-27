@@ -17,6 +17,12 @@ class SolucaoPortalColaboracaoPage extends React.Component {
       setMenu: false,
     };
 
+
+    String.prototype.replaceAll = function(search, replacement) {
+      var target = this;
+      return target.split(search).join(replacement);
+  };
+
   }
 
   componentDidMount() {
@@ -155,9 +161,9 @@ class SolucaoPortalColaboracaoPage extends React.Component {
 
                 
 
-                <li className="nav-item" role="presentation" key={solucao.menu}>
-                {id && id == solucao.menu && <a className="nav-link active show" id={`${solucao.menu}-tab`} href={`/solucoes-portal-colaboracao/${solucao.menu}`} role="tab" aria-controls={solucao.menu} aria-selected="true">{solucao.menu}</a>}
-                {(!id || id != solucao.menu) && <a className="nav-link" id={`${solucao.menu}-tab`} href={`/solucoes-portal-colaboracao/${solucao.menu}`} role="tab" aria-controls={solucao.menu} aria-selected="true">{solucao.menu}</a>}
+                <li className="nav-item" role="presentation" key={solucao.menu.replaceAll(" ","-")}>
+                {id && id.replaceAll(" ","-") == solucao.menu.replaceAll(" ","-") && <a className="nav-link active show" id={`${solucao.menu.replaceAll(" ","-")}-tab`} href={`/solucoes-portal-colaboracao/${solucao.menu.replaceAll(" ","-")}`} role="tab" aria-controls={solucao.menu.replaceAll(" ","-")} aria-selected="true">{solucao.menu}</a>}
+                {(!id || id.replaceAll(" ","-") != solucao.menu.replaceAll(" ","-")) && <a className="nav-link" id={`${solucao.menu.replaceAll(" ","-")}-tab`} href={`/solucoes-portal-colaboracao/${solucao.menu.replaceAll(" ","-")}`} role="tab" aria-controls={solucao.menu.replaceAll(" ","-")} aria-selected="true">{solucao.menu}</a>}
                 </li>
 
 
@@ -177,7 +183,7 @@ class SolucaoPortalColaboracaoPage extends React.Component {
 
               {solucaos && solucaos.items && solucaos.items.map((solucao) =>
 
-                <div className={`tab-pane fade ` + ((setMenu == true && id == solucao.menu) ? "show active" : "")} id={solucao.menu} role="tabpanel" aria-labelledby={`${solucao.menu}-tab`} key={solucao.menu}>
+                <div className={`tab-pane fade ` + ((setMenu == true && id.replaceAll(" ","-") == solucao.menu.replaceAll(" ","-")) ? "show active" : "")} id={solucao.menu.replaceAll(" ","-")} role="tabpanel" aria-labelledby={`${solucao.menu.replaceAll(" ","-")}-tab`} key={solucao.menu.replaceAll(" ","-")}>
                   <div className="div-rh-info">
                     <div className="div-rh-titulo">
 

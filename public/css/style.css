@@ -846,7 +846,20 @@
 
 }
 
+.div-entre-em-contato form textarea {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    background-color: transparent !important;
+    /* identical to box height */
 
+    /* Gray / 500 */
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #97A0AF;
+
+}
 .div-entre-em-contato form input::placeholder,
 #sejaparceiro form input::placeholder {
     font-style: normal;
@@ -3834,3 +3847,20 @@ height: 400px;
     left: -10px;
 display: none;
 }
+
+/* .carousel-item { transition: transform 0.5s ease, opacity 5s ease-out; } */
+
+
+.carousel-inner .carousel-item {
+    opacity: 0;
+    transition: none;
+    transform: translate3d(0,0,0) !important;
+  }
+  
+  .carousel-inner .active {
+    transition: opacity 0s ease-in-out;
+    opacity: 1;
+  }
+
+
+  
