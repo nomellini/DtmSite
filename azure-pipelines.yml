@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: 'dev'
+  tag: $(ENV)
 
 stages:
 - stage: Build
