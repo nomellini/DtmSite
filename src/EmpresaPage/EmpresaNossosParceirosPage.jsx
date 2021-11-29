@@ -22,42 +22,43 @@ class EmpresaNossosParceirosPage extends React.Component {
 
   }
 
-    componentDidMount() {
-      this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Nosso parceiros"));
+  componentDidMount() {
+    this.props.dispatch(solucaoActions.GetTbSolucaoBYSlug("Nosso parceiros"));
 
-    }
-    componentDidUpdate(){
+  }
+  componentDidUpdate() {
 
-      updateSocial();
-      this.props.dispatch(estadoActions.getAll());
+    updateSocial();
+    this.props.dispatch(estadoActions.getAll());
 
-    }
+  }
 
-    handleChangeEstadoModal(e) {
-      const { name, value } = e.target;
-      this.setState({ [name]: value });
-  
-      this.props.dispatch(cidadeActions.GetCidadesByUFModal(value));
-  
-    }
+  handleChangeEstadoModal(e) {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
 
-    render() {
-      const { user, users,solucaos,estados,cidades } = this.props;
-      const {  estadoSelectedModal, cidadeselectedModal } = this.state;
+    this.props.dispatch(cidadeActions.GetCidadesByUFModal(value));
+
+  }
+
+  render() {
+    const { user, users, solucaos, estados, cidades } = this.props;
+    const { estadoSelectedModal, cidadeselectedModal } = this.state;
 
 
-      return (
-          <div >
+    return (
+      <div >
 
-            {solucaos && solucaos.items && solucaos.items.map((solucao)=> 
-            
-              <div key='0'>{Parser(solucao.conteudo)}</div>
+        {solucaos && solucaos.items && solucaos.items.map((solucao) =>
 
-      
+          <div key='0'>{Parser(solucao.conteudo)}</div>
 
-          )}
 
-<div className="modal fade" id="sejaparceiro" tabIndex={-1} role="dialog" aria-labelledby="sejaparceiro" aria-hidden="true">
+
+        )}
+
+
+        <div className="modal fade" id="sejaparceiro" tabIndex={-1} role="dialog" aria-labelledby="sejaparceiro" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
@@ -127,20 +128,20 @@ class EmpresaNossosParceirosPage extends React.Component {
           </div>
         </div>
 
-        </div>
-        
-        );
-    }
+      </div>
+
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    const { users, authentication,solucaos } = state;
-    const { user } = authentication;
-    return {
-        user,
-        users,
-        solucaos
-    };
+  const { users, authentication, solucaos } = state;
+  const { user } = authentication;
+  return {
+    user,
+    users,
+    solucaos
+  };
 }
 
 const connectedEmpresaNossosParceirosPage = connect(mapStateToProps)(EmpresaNossosParceirosPage);
