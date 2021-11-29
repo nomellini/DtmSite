@@ -12,7 +12,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 # Copies package.json and package-lock.json to Docker environment
 COPY package.json ./
 COPY package*.json ./
-COPY public ./
  
 # Installs all node packages
 RUN npm install --silent
