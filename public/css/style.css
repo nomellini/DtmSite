@@ -772,6 +772,7 @@
 }
 
 #sejaparceiro .modal-title {
+
     padding-left: 2%;
     padding-right: 2%;
     font-style: normal;
@@ -781,7 +782,7 @@
 
     /* Gray / 900 */
     color: #253858;
-    margin-top: 5em;
+    margin-top: 0.1em;
 }
 
 
