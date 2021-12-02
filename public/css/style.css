@@ -3876,7 +3876,7 @@ justify-content: center; */
     height: 680px;
 
     display: grid;
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: repeat(3, 33%);
     gap: 1vw;
     font-style: normal;
     font-weight: normal;

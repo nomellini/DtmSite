@@ -89,7 +89,7 @@ class DefaultLayout extends React.Component {
 
                     </li>
                     <li className="nav-item">
-                    <a className="btn btn-menu-portal-clientes">Portal do cliente <img src="../public/images/icon-portal-docliente.svg"/> </a>
+                    <a className="btn btn-menu-portal-clientes" href="http://portalcliente.datamace.com.br/" target="_blank" >Portal do cliente <img src="../public/images/icon-portal-docliente.svg"/> </a>
 
                     </li>
                   </ul>
