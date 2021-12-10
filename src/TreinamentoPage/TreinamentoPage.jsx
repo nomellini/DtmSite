@@ -18,6 +18,11 @@ class TreinamentoPage extends React.Component {
   openCalendario() {
     $('#modalcalendario').modal('show');
 
+    $(".modal-body-item").hover(function() {
+      $(this).css('cursor','pointer');
+  }, function() {
+      $(this).css('cursor','auto');
+  });
     // this.props.dispatch(grupoActions.getAll());
 }
 
@@ -64,7 +69,12 @@ class TreinamentoPage extends React.Component {
         const { user, users,grupos,calendarios,solucaos } = this.props;
 
 
-        
+        $(".modal-body-item").hover(function() {
+          $(this).css('cursor','pointer');
+      }, function() {
+          $(this).css('cursor','auto');
+      });
+
         return (
             <div >
 
@@ -129,9 +139,12 @@ class TreinamentoPage extends React.Component {
                     {calendarios && calendarios.items && calendarios.items.map((calendario)=> 
                         <div key={calendario.dataCalendario}>
                         <h6 className="modal-title" >{calendario.dateFormat}</h6>
-<div  className="modal-body-item-day">
+                        <div  className="modal-body-item-day">
                         {calendario && calendario.calendarioTreinamentoEntityChildren && calendario.calendarioTreinamentoEntityChildren.map((item)=> 
-                        <div key={item.curTreinamento.idTreinamento} className="modal-body-item">
+                        <div key={item.curTreinamento.idTreinamento} className="modal-body-item" onClick={function(){
+                              location.href = `/treinamento-view?idTreinamento=${item.curTreinamento.idTreinamento}`
+
+                        }}>
                           <p>{item.curTreinamento.nome}</p>
                           <span>{item.curTurma.aberta ? "Aberta": "Encerrada"}</span>
                           </div>

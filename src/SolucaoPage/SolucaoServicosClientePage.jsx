@@ -72,7 +72,7 @@ class SolucaoServicosClientePage extends React.Component {
                         O Suporte On Line ao cliente é realizado por meio de ferramenta web "SAD-Sistema De Atendimento Datamace". É um serviço no qual os clientes relatam suas necessidades e acompanham o processo de solução de forma personalizada e com muita agilidade.
                                               </p>
                         <div className="card-noticias-a">
-                          <a href="/portal-cliente">Acessar o Portal do Cliente</a> 
+                          <a  href="http://portalcliente.datamace.com.br/" target="_blank">Acessar o Portal do Cliente</a> 
                         </div>
                       </div>
                     </div>
@@ -86,7 +86,7 @@ class SolucaoServicosClientePage extends React.Component {
                         <p className="card-text">
                         O Suporte por meio do Contact Center consiste em relatar a necessidade ao consultor até que a solução para o problema seja encontrada. Este modelo de serviço esta a disposição de todos os clientes e parceiros de segunda a sexta no Período das 8h às 18h.                       </p>
                         <div className="card-noticias-a">
-                          <a  href="/portal-cliente">Ligar para Help Desk</a> 
+                          <a   href="http://portalcliente.datamace.com.br/" target="_blank">Ligar para Help Desk</a> 
                         </div>
                       </div>
                     </div>
@@ -100,7 +100,7 @@ class SolucaoServicosClientePage extends React.Component {
                         <p className="card-text">
                         Se você esta implementando o software em seu servidor ou em nosso DataCenter, nossos consultores de Pós Venda poderão ajuda-lo com a experiência e conhecimento Das melhores práticas específicas do seu seguimento de mercado.                        </p>
                         <div className="card-noticias-a">
-                          <a href="/portal-cliente">Conheça nossa metodologia</a> 
+                          <a href="http://portalcliente.datamace.com.br/" target="_blank">Conheça nossa metodologia</a> 
                         </div>
                       </div>
                     </div>
@@ -113,7 +113,11 @@ class SolucaoServicosClientePage extends React.Component {
               <div className="col-md-6">
                 <h3>
                 Tenha sempre em mãos os manuais atualizados para consulta.               </h3>
-                <button type="button" className="btn btn-success">
+                <button type="button" className="btn btn-success" onClick={function(){
+
+                window.open('http://portalcliente.datamace.com.br/')
+
+                }}>
                 Acessar Portal do Cliente        
                       </button>
               </div>

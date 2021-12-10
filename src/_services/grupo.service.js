@@ -8,7 +8,8 @@ export const grupoService = {
     getBYId,
     FormNotificacaoDisp,
     getCalendario,
-    Inscrever
+    Inscrever,
+    UserExists
 };
 
 
@@ -85,6 +86,16 @@ function getAll() {
     };
 
     return fetch(`${config.apiUrl}/v1/CurTreinamentoes/notAdm`, requestOptions).then(handleResponse);
+}
+
+
+function UserExists(cpf) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+
+    return fetch(`${config.apiUrl}/v1/CurTreinamentoes/UserExists/?cpf=${cpf}`, requestOptions);
 }
 
 
