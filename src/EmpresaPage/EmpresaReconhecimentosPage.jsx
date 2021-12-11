@@ -15,6 +15,18 @@ class EmpresaReconhecimentosPage extends React.Component {
       componentDidUpdate(){
 
         updateSocial();
+
+        fetch('/public/images/empresa-top-of-mind.svg')
+          .then(response => response.text())
+          .then((data) => {
+            $("#empresa-top-of-mind").html(data);
+          })
+
+          fetch('/public/images/empresa-reconhecimentos-melhores.svg')
+          .then(response => response.text())
+          .then((data) => {
+            $("#empresa-reconhecimentos-melhores").html(data);
+          })
   
       }
       render() {
