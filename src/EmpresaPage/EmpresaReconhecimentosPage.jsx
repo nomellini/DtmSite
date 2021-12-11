@@ -31,6 +31,8 @@ class EmpresaReconhecimentosPage extends React.Component {
             )}
   
           </div>
+
+          
           
           );
       }
