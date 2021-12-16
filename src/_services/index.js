@@ -4,3 +4,4 @@ export * from './noticia.service';
 export * from './solucao.service';
 export * from './estado.service';
 export * from './cidade.service';
+export * from './mailcontrole.service';

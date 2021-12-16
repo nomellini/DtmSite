@@ -13,6 +13,7 @@ import { cidadesmodais } from './cidades.reducer';
 import { solucaos } from './solucaos.reducer';
 import { solucaosnew } from './solucaosnew.reducer';
 import { calendarios } from './calendarios.reducer';
+import { mailcontroles } from './mailcontroles.reducer';
 
 const rootReducer = combineReducers({
   authentication,
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   estados,
   cidades,
   cidadesmodais,
-  solucaosnew
+  solucaosnew,
+  mailcontroles
 });
 
 export default rootReducer;

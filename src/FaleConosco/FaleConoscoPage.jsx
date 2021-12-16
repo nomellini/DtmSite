@@ -7,6 +7,7 @@ import { solucaoActions } from '../_actions';
 
 import { estadoActions } from '../_actions';
 import { cidadeActions } from '../_actions';
+import { mailcontroleActions } from '../_actions';
 
 import Parser from 'html-react-parser';
 import InputMask from 'react-input-mask';
@@ -15,6 +16,11 @@ class FaleConoscoPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      nome: '',
+      email: '',
+      empresa: '',
+      telefone: '',
+      info: '',
       estadoSelected: '',
       cidadeselected: '',
       estadoSelectedModal: '',
@@ -24,6 +30,8 @@ class FaleConoscoPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEstado = this.handleChangeEstado.bind(this);
     this.handleChangeEstadoModal = this.handleChangeEstadoModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.ClearInputs = this.ClearInputs.bind(this);
 
   }
 
@@ -61,9 +69,41 @@ class FaleConoscoPage extends React.Component {
     this.setState({ [name]: value });
   }
 
+  ClearInputs(e) {
+    this.setState({
+      submitted: false,
+      nome: '',
+      email: '',
+      empresa: '',
+      telefone: '',
+      info: '',
+      estadoSelected: '',
+      cidadeselected: '',
+      estadoSelectedModal: '',
+      cidadeselectedModal: '',
+      assunto: ''
+    });
+
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.setState({ submitted: true });
+    const { cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info } = this.state;
+    const { dispatch } = this.props;
+    if (cidadeselected && estadoSelected  &&  assunto  && nome  && email  && empresa  && telefone  && info) {
+
+      dispatch(mailcontroleActions.FaleConosco(cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info ));
+
+      // $(".modal-center").hide();
+
+    }
+  }
+
   render() {
-    const { user, estados, cidades, cidadesmodais,assunto } = this.props;
-    const { cidadeselected, estadoSelected, estadoSelectedModal, cidadeselectedModal } = this.state;
+    const { user, estados, cidades,alert } = this.props;
+    const { cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info } = this.state;
 
 
     return (
@@ -94,7 +134,7 @@ class FaleConoscoPage extends React.Component {
               A Datamace sempre terá uma soluções para tornar melhor os seus processos de negócio otimizado a sua força de trabalho.</p>
           </div>
           <div className="col-md-6">
-            <form role="form" style={{minHeight: '584px', height: 'auto'}}>
+            <form role="form" style={{ minHeight: '584px', height: 'auto' }}>
 
               <div className="form-group">
 
@@ -111,12 +151,12 @@ class FaleConoscoPage extends React.Component {
 
               <div className="form-group">
 
-                <input type="text" name="nome" id="nome" placeholder="Digite seu nome" />
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome" value={nome} onChange={this.handleChange} />
               </div>
 
               <div className="form-group">
 
-                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" />
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" value={email} onChange={this.handleChange} />
               </div>
 
               <div className="form-group form-select-div">
@@ -144,30 +184,38 @@ class FaleConoscoPage extends React.Component {
               </div>
 
               <div className="form-group">
-                <input type="text" name="empresa" id="empresa" placeholder="Digite o nome de sua empresa" />
+                <input type="text" name="empresa" id="empresa" placeholder="Digite o nome de sua empresa" value={empresa} onChange={this.handleChange} />
               </div>
 
               <div className="form-group">
-                <input type="text" name="telefone" id="telefone" placeholder="Digite seu telefone para contato" />
+                <input type="text" name="telefone" id="telefone" placeholder="Digite seu telefone para contato" value={telefone} onChange={this.handleChange} />
               </div>
 
               <div className="form-group">
 
-                <textarea name="info" id="info" placeholder="Mensagem" />
+                <textarea name="info" id="info" placeholder="Mensagem" value={info} onChange={this.handleChange} />
               </div>
+              <div className={"div-alert-login form-group"} >
+                    {alert.message &&
+                            <div className={`alert ${alert.type}`}  style={{textAlign: 'center'}}>
+                                <img src="../public/images/icons/icon-error.svg" className="menu-icon" style={{marginRight: '1%'}}/>
+                                <span>{alert.message}</span></div>
+                        }
+                        </div>
               <div className="form-divs">
                 <a>
                   Limpar dados
                 </a>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
                   Enviar
                 </button>
+                
               </div>
             </form>
           </div>
         </div>
 
-       
+
 
       </div>
 
@@ -176,13 +224,14 @@ class FaleConoscoPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication, solucaos, cidades, estados, cidadesmodais, noticias, solucaosnew } = state;
+  const { users, authentication, solucaos, cidades, estados, cidadesmodais, noticias, solucaosnew,alert } = state;
   const { user } = authentication;
   return {
     user,
     users,
     solucaos,
-    estados, cidades, cidadesmodais, noticias, solucaosnew
+    estados, cidades, cidadesmodais, noticias, solucaosnew,
+    alert
   };
 }
 

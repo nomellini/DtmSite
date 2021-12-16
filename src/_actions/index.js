@@ -5,3 +5,4 @@ export * from './noticia.actions';
 export * from './solucao.actions';
 export * from './estado.actions';
 export * from './cidade.actions';
+export * from './mailcontrole.actions';

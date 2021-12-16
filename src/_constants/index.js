@@ -6,3 +6,4 @@ export * from './solucao.constants';
 export * from './cidade.constants';
 export * from './estado.constants';
 export * from './calendario.constants';
+export * from './mailcontrole.constants';
