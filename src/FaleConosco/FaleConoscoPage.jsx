@@ -94,7 +94,7 @@ class FaleConoscoPage extends React.Component {
     const { dispatch } = this.props;
     if (cidadeselected && estadoSelected  &&  assunto  && nome  && email  && empresa  && telefone  && info) {
 
-      dispatch(mailcontroleActions.FaleConosco(cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info ));
+      dispatch(mailcontroleActions.FaleConosco(cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info,'','' ));
 
       // $(".modal-center").hide();
 

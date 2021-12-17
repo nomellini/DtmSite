@@ -2,23 +2,41 @@ import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const mailcontroleService = {
-    FaleConosco
+    FaleConosco,
+    SejaParceiro
 };
 
 
-function FaleConosco(cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info) {
+function FaleConosco(cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info,qtdefuncionarios,cargo) {
 
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
-        body: JSON.stringify({cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info })
+        body: JSON.stringify({cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info,qtdefuncionarios,cargo })
     };
 
     return fetch(`${config.apiUrl}/v1/MailControles/FaleConosco` , requestOptions)
         .then(handleResponse)
         .then(nome => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            return JSON.stringify({cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info});
+            return JSON.stringify({cidadeselected, estadoSelected, assunto,nome,email,empresa,telefone,info,qtdefuncionarios,cargo});
+        });   
+}
+
+
+function SejaParceiro(nome,empresa,estadoSelected,cidadeselected,email,telefone,info) {
+
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify({nome,empresa,estadoSelected,cidadeselected,email,telefone,info })
+    };
+
+    return fetch(`${config.apiUrl}/v1/MailControles/SejaParceiro` , requestOptions)
+        .then(handleResponse)
+        .then(nome => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            return JSON.stringify({nome,empresa,estadoSelected,cidadeselected,email,telefone,info});
         });   
 }
 

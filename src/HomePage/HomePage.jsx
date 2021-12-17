@@ -8,6 +8,7 @@ import { solucaoActions } from '../_actions';
 import { estadoActions } from '../_actions';
 import { cidadeActions } from '../_actions';
 import { noticiaActions } from '../_actions';
+import { mailcontroleActions } from '../_actions';
 
 import Parser from 'html-react-parser';
 
@@ -18,12 +19,30 @@ class HomePage extends React.Component {
       estadoSelected: '',
       cidadeselected: '',
       estadoSelectedModal: '',
-      cidadeselectedModal: ''
+      cidadeselectedModal: '',
+      nomeModal: '',
+      empresaModal: '',
+      emailModal: '',
+      telefoneModal: '',
+      infoModal: '',
+      submittedModal: false,
+      nome: '',
+      empresa: '',
+      email: '',
+      telefone: '',
+      info: '',
+      submitted: false,
+      qtdefuncionarios: '',
+      cargo: '',
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEstado = this.handleChangeEstado.bind(this);
     this.handleChangeEstadoModal = this.handleChangeEstadoModal.bind(this);
-
+    this.handleSubmitModal = this.handleSubmitModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.ClearInputs = this.ClearInputs.bind(this);
+    
   }
 
   componentDidUpdate(){
@@ -67,9 +86,67 @@ class HomePage extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleSubmitModal(e) {
+    e.preventDefault();
+
+    this.setState({ submittedModal: true });
+    const { nomeModal,empresaModal,estadoSelectedModal,cidadeselectedModal,emailModal,telefoneModal,infoModal } = this.state;
+    const { dispatch } = this.props;
+    if (nomeModal && empresaModal && estadoSelectedModal && cidadeselectedModal && emailModal && telefoneModal && infoModal) {
+
+      dispatch(mailcontroleActions.SejaParceiro(nomeModal,empresaModal,estadoSelectedModal,cidadeselectedModal,emailModal,telefoneModal,infoModal ));
+      // this.setState({ submittedModal: false });
+      this.ClearInputs();
+
+      setTimeout(() => {
+        this.setState({ submittedModal: false });
+      }, 10000);
+
+    }
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.setState({ submitted: true });
+    const {nome,empresa,estadoSelected,cidadeselected,email,telefone,info,qtdefuncionarios,cargo } = this.state;
+    const { dispatch } = this.props;
+    if (nome && empresa && estadoSelected && cidadeselected && email  && info) {
+
+      dispatch(mailcontroleActions.FaleConosco(cidadeselected, estadoSelected, "aliancas",nome,email,empresa,telefone,info,qtdefuncionarios,cargo ));
+      // this.setState({ submitted: false});
+      this.ClearInputs();
+
+      setTimeout(() => {
+        this.setState({ submitted: false });
+      }, 10000);
+    }
+  }
+
+  ClearInputs(e) {
+      this.setState({
+            estadoSelected: '',
+            cidadeselected: '',
+            estadoSelectedModal: '',
+            cidadeselectedModal: '',
+            nomeModal: '',
+            empresaModal: '',
+            emailModal: '',
+            telefoneModal: '',
+            infoModal: '',
+            nome: '',
+            empresa: '',
+            email: '',
+            telefone: '',
+            info: '',
+            qtdefuncionarios: '',
+            cargo: '',
+      });
+  }
+
   render() {
-    const { user, solucaos, estados, cidades, cidadesmodais, noticias, solucaosnew } = this.props;
-    const { cidadeselected, estadoSelected, estadoSelectedModal, cidadeselectedModal } = this.state;
+    const { user, solucaos, estados, cidades, cidadesmodais, noticias, solucaosnew,alert } = this.props;
+    const { cidadeselected, estadoSelected, estadoSelectedModal, cidadeselectedModal,nome,empresa,email,telefone,info,nomeModal,empresaModal,emailModal,telefoneModal,infoModal,qtdefuncionarios,cargo,submitted,submittedModal } = this.state;
 
     var root = document.documentElement;
     const lists = document.querySelectorAll('.hs-solucao-home');
@@ -228,9 +305,19 @@ class HomePage extends React.Component {
           </div>
           <div className="col-md-6">
             <form role="form">
+            {submitted &&
+              <div className={"div-alert-login form-group"} style={{margin: 0}}>
+                    {alert.message &&
+                            <div className={`alert ${alert.type}`}  style={{textAlign: 'center', padding: 0}}>
+                                <img src="../public/images/icons/icon-error.svg" className="menu-icon" style={{marginRight: '1%'}}/>
+                                <span>{alert.message}</span></div>
+                        }
+                        </div>
+              }
+
               <div className="form-group">
 
-                <input type="text" name="nome" id="nome" placeholder="Digite seu nome" />
+                <input type="text" name="nome" id="nome" placeholder="Digite seu nome" value={nome} onChange={this.handleChange} />
               </div>
 
               <div className="form-group form-select-div">
@@ -258,39 +345,42 @@ class HomePage extends React.Component {
               </div>
 
               <div className="form-group">
-                <input type="text" name="empresa" id="empresa" placeholder="Digite o nome de sua empresa" />
+                <input type="text" name="empresa" id="empresa" placeholder="Digite o nome de sua empresa" value={empresa} onChange={this.handleChange}/>
               </div>
 
 
               <div className="form-group form-select-div">
-                <div className="form-group-item" style={{ marginRight: '3%' }}>
+                <div className="form-group-item" style={{ marginRight: '3%'}}>
+                <input type="number" name="qtdefuncionarios" id="qtdefuncionarios" value={qtdefuncionarios} onChange={this.handleChange} style={{ width: '45%' }} placeholder="Quantidade de funcionários"/>
 
-                  <select name="qtdefuncionarios" id="qtdefuncionarios" onChange={this.handleChange} value="">
+                  {/* <select name="qtdefuncionarios" id="qtdefuncionarios" onChange={this.handleChange} value="">
                     <option disabled value="">Quantidade de funcionários</option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className="form-group-item">
+                <input type="text" name="cargo" id="cargo" placeholder="Digite seu cargo" value={cargo} onChange={this.handleChange} style={{ width: '45%' }}/>
 
-                  <select name="cargo" id="cargo" onChange={this.handleChange} value="">
+                  {/* <select name="cargo" id="cargo" onChange={this.handleChange} value="">
                     <option disabled value="">Selecione seu cargo</option>
-                  </select>
+                  </select> */}
                 </div>
               </div>
 
 
               <div className="form-group">
 
-                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" />
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" value={email} onChange={this.handleChange}/>
               </div>
               <div className="form-group">
 
-                <input type="text" name="info" id="info" placeholder="Informações adicionais" />
+                <input type="text" name="info" id="info" placeholder="Informações adicionais" value={info} onChange={this.handleChange}/>
               </div>
+            
               <div className="form-divs">
                 <a>
                   Limpar dados
                 </a>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
                   Enviar
                 </button>
               </div>
@@ -311,10 +401,10 @@ class HomePage extends React.Component {
                 <form role="form">
                   <div className="form-group">
 
-                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome" />
+                    <input type="text" name="nomeModal" id="nomeModal" placeholder="Digite seu nome" value={nomeModal} onChange={this.handleChange} />
                   </div>
                   <div className="form-group">
-                    <input type="text" name="empresa" id="empresa" placeholder="Digite o nome da empresa" />
+                    <input type="text" name="empresaModal" id="empresaModal" placeholder="Digite o nome da empresa" value={empresaModal} onChange={this.handleChange}/>
                   </div>
 
                   <div className="form-group form-select-div">
@@ -347,22 +437,30 @@ class HomePage extends React.Component {
 
                   <div className="form-group">
 
-                    <input type="email" name="email" id="email" placeholder="Digite seu e-mail" />
+                    <input type="email" name="emailModal" id="emailModal" placeholder="Digite seu e-mail" value={emailModal} onChange={this.handleChange}/>
                   </div>
                   <div className="form-group">
 
-                    <input type="text" name="telefone" id="telefone" placeholder="Digite seu telefone para contato" />
+                    <input type="text" name="telefoneModal" id="telefoneModal" placeholder="Digite seu telefone para contato" value={telefoneModal} onChange={this.handleChange}/>
                   </div>
                   <div className="form-group">
 
-                    <input type="text" name="info" id="info" placeholder="Informações adicionais" />
+                    <input type="text" name="infoModal" id="infoModal" placeholder="Informações adicionais" value={infoModal} onChange={this.handleChange}/>
                   </div>
-
+                  {submittedModal &&
+                  <div className={"div-alert-login form-group"} style={{margin: 0}}>
+                    {alert.message &&
+                            <div className={`alert ${alert.type}`}  style={{textAlign: 'center', padding: 0}}>
+                                <img src="../public/images/icons/icon-error.svg" className="menu-icon" style={{marginRight: '1%'}}/>
+                                <span>{alert.message}</span></div>
+                        }
+                        </div>
+                  }
                 </form>
               </div>
               <div className="modal-footer">
                 <a >Limpar dados</a>
-                <button type="button" className="btn btn-primary">Enviar</button>
+                <button type="button" className="btn btn-primary" onClick={this.handleSubmitModal}>Enviar</button>
               </div>
             </div>
           </div>
@@ -375,13 +473,14 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication, solucaos, cidades, estados, cidadesmodais, noticias, solucaosnew } = state;
+  const { users, authentication, solucaos, cidades, estados, cidadesmodais, noticias, solucaosnew,alert } = state;
   const { user } = authentication;
   return {
     user,
     users,
     solucaos,
-    estados, cidades, cidadesmodais, noticias, solucaosnew
+    estados, cidades, cidadesmodais, noticias, solucaosnew,
+    alert
   };
 }
 
